@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Robert Monterroso - Senior IT Coordinator specializing in MDM deployment, security, and making technology accessible.">
+    <meta name="author" content="Robert Monterroso">
+    <title>Robert Monterroso | Senior IT Coordinator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="nav" id="nav">
+        <div class="nav-inner">
+            <a href="#" class="nav-logo">RM</a>
+            <div class="nav-links" id="navLinks">
+                <a href="#about">About</a>
+                <a href="#skills">Skills</a>
+                <a href="#projects">Projects</a>
+                <a href="#experience">Experience</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <button class="nav-toggle" aria-label="Toggle menu" onclick="document.getElementById('navLinks').classList.toggle('open')">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <p class="hero-label">Senior IT Coordinator</p>
+            <h1 class="hero-title">Robert Monterroso</h1>
+            <p class="hero-subtitle">
+                I make technology accessible. With 5+ years managing devices, securing systems,
+                and supporting users across multi-site school environments, I help organizations
+                get the most out of their tech.
+            </p>
+            <div class="hero-chips">
+                <span class="hero-chip">Jamf Certified</span>
+                <span class="hero-chip">CompTIA Security+</span>
+                <span class="hero-chip">Bilingual EN/ES</span>
+            </div>
+            <div class="hero-actions">
+                <a href="#contact" class="btn-filled">
+                    <span class="material-symbols-outlined">mail</span>
+                    Get in Touch
+                </a>
+                <a href="#about" class="btn-outlined">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section class="section" id="about">
+        <div class="container">
+            <h2 class="section-title">About</h2>
+            <div class="about-grid">
+                <div class="about-text">
+                    <p class="lead">
+                        I believe technology should empower people, not intimidate them.
+                    </p>
+                    <p>
+                        Over 5 years in IT, I've advanced from Technician to Senior Coordinator at a
+                        multi-site public school system. I translate user needs into technical solutions,
+                        troubleshoot complex issues, and implement robust security protocols.
+                    </p>
+                    <p>
+                        Skilled in large-scale MDM deployment, system optimization, and cross-functional
+                        collaboration. I bridge the gap between technology and people with patience, clear
+                        communication, and solutions that actually fit how people work.
+                    </p>
+                </div>
+                <div class="about-quote card elevation-2">
+                    <span class="material-symbols-outlined quote-icon">format_quote</span>
+                    <blockquote>
+                        "During my first week, I was thrown into the deep end -- tasked with fixing
+                        devices and an organizational unit left in disarray. Despite barely knowing
+                        anything at the time, I managed to resolve it all. That experience taught me
+                        that determination and resourcefulness can solve almost anything."
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills -->
+    <section class="section section-tinted" id="skills">
+        <div class="container">
+            <h2 class="section-title">What I Do</h2>
+            <div class="skills-grid">
+                <div class="card elevation-1 skill-card">
+                    <div class="skill-icon">
+                        <span class="material-symbols-outlined">search</span>
+                    </div>
+                    <h3>Problem Solving</h3>
+                    <p>
+                        Creative solutions with the resources at hand. I adapt, improvise, and
+                        find workarounds when perfect solutions aren't available.
+                    </p>
+                </div>
+                <div class="card elevation-1 skill-card">
+                    <div class="skill-icon">
+                        <span class="material-symbols-outlined">hub</span>
+                    </div>
+                    <h3>Systems Thinking</h3>
+                    <p>
+                        I see how the pieces connect. Understanding full system flows lets me
+                        anticipate issues and build smoother experiences.
+                    </p>
+                </div>
+                <div class="card elevation-1 skill-card">
+                    <div class="skill-icon">
+                        <span class="material-symbols-outlined">groups</span>
+                    </div>
+                    <h3>User Advocacy</h3>
+                    <p>
+                        The human element matters as much as the technical fix. I make people
+                        comfortable with technology through empathy and clear communication.
+                    </p>
+                </div>
+            </div>
+
+            <div class="tech-stack">
+                <h3>Technologies & Tools</h3>
+                <div class="chip-group">
+                    <span class="chip">Mosyle MDM</span>
+                    <span class="chip">Windows/macOS/iOS</span>
+                    <span class="chip">Google Workspace Admin</span>
+                    <span class="chip">Freshservice</span>
+                    <span class="chip">Network Troubleshooting (TCP/IP)</span>
+                    <span class="chip">Security Protocols</span>
+                    <span class="chip">Device Deployment</span>
+                    <span class="chip">Technical Documentation</span>
+                    <span class="chip">Python</span>
+                    <span class="chip">Docker</span>
+                    <span class="chip">Linux</span>
+                    <span class="chip">Node.js</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects -->
+    <section class="section" id="projects">
+        <div class="container">
+            <h2 class="section-title">Projects</h2>
+            <div class="projects-grid">
+
+                <div class="card elevation-1 project-card">
+                    <div class="project-header">
+                        <span class="project-type">AI / Finance</span>
+                        <span class="status status-active">Active</span>
+                    </div>
+                    <h3>Polybot</h3>
+                    <p>
+                        AI-assisted prediction market bot for Polymarket and Kalshi. Uses a
+                        three-model ensemble (Claude, GPT-4o, DeepSeek) to detect trading edges
+                        in real time, with Kelly Criterion sizing and automated position management.
+                        Deployed on a Raspberry Pi.
+                    </p>
+                    <div class="chip-group chip-group-sm">
+                        <span class="chip chip-sm">Python</span>
+                        <span class="chip chip-sm">AsyncIO</span>
+                        <span class="chip chip-sm">WebSockets</span>
+                        <span class="chip chip-sm">Multi-LLM</span>
+                    </div>
+                </div>
+
+                <div class="card elevation-1 project-card">
+                    <div class="project-header">
+                        <span class="project-type">AI / Finance</span>
+                        <span class="status status-active">Active</span>
+                    </div>
+                    <h3>Govbot</h3>
+                    <p>
+                        Equity trading bot that exploits government data publication lag.
+                        Scans SAM.gov, SEC EDGAR, Federal Register, and Congress.gov for
+                        signals, resolves companies to tickers, and executes paper trades
+                        via Alpaca with AI-driven analysis.
+                    </p>
+                    <div class="chip-group chip-group-sm">
+                        <span class="chip chip-sm">Python</span>
+                        <span class="chip chip-sm">AsyncIO</span>
+                        <span class="chip chip-sm">Alpaca API</span>
+                        <span class="chip chip-sm">Multi-LLM</span>
+                    </div>
+                </div>
+
+                <div class="card elevation-1 project-card">
+                    <div class="project-header">
+                        <span class="project-type">Automation</span>
+                        <span class="status status-progress">In Progress</span>
+                    </div>
+                    <h3>YouTube Lead Qualifier</h3>
+                    <p>
+                        Automated lead qualification system for YouTube monetization consulting.
+                        Analyzes channel metrics with GPT-4, scores monetization potential,
+                        and routes leads through SMS, email, and Slack notifications with
+                        auto-booking integration.
+                    </p>
+                    <div class="chip-group chip-group-sm">
+                        <span class="chip chip-sm">Node.js</span>
+                        <span class="chip chip-sm">YouTube API</span>
+                        <span class="chip chip-sm">GPT-4</span>
+                        <span class="chip chip-sm">Twilio</span>
+                    </div>
+                </div>
+
+                <div class="card elevation-1 project-card">
+                    <div class="project-header">
+                        <span class="project-type">Automation</span>
+                        <span class="status status-progress">In Progress</span>
+                    </div>
+                    <h3>Research Automation</h3>
+                    <p>
+                        End-to-end research pipeline combining web scraping, AI content
+                        processing, and Notion workspace integration. Handles bulk URL
+                        processing, auto-transcription cleaning, and structured knowledge
+                        base creation via n8n webhooks.
+                    </p>
+                    <div class="chip-group chip-group-sm">
+                        <span class="chip chip-sm">Python</span>
+                        <span class="chip chip-sm">Selenium</span>
+                        <span class="chip chip-sm">Claude API</span>
+                        <span class="chip chip-sm">Notion API</span>
+                    </div>
+                </div>
+
+                <div class="card elevation-1 project-card">
+                    <div class="project-header">
+                        <span class="project-type">Web App</span>
+                        <span class="status status-complete">Complete</span>
+                    </div>
+                    <h3>Web Audio Synthesizer</h3>
+                    <p>
+                        Browser-based TR-808 drum machine with a 16-step sequencer and
+                        physically modeled 808 sounds -- kicks, snares, hi-hats, toms,
+                        and claps. Zero dependencies, pure Web Audio API with low-latency
+                        scheduling.
+                    </p>
+                    <div class="chip-group chip-group-sm">
+                        <span class="chip chip-sm">JavaScript</span>
+                        <span class="chip chip-sm">Web Audio API</span>
+                        <span class="chip chip-sm">ES6 Modules</span>
+                    </div>
+                </div>
+
+                <div class="card elevation-1 project-card">
+                    <div class="project-header">
+                        <span class="project-type">Mobile / UI</span>
+                        <span class="status status-complete">Prototype</span>
+                    </div>
+                    <h3>Mobile Ordering App</h3>
+                    <p>
+                        Component library and UI prototype for a mobile food ordering
+                        experience. Built with a modern React stack featuring accessible
+                        components, form validation, interactive charts, and carousel
+                        navigation.
+                    </p>
+                    <div class="chip-group chip-group-sm">
+                        <span class="chip chip-sm">React</span>
+                        <span class="chip chip-sm">TypeScript</span>
+                        <span class="chip chip-sm">Tailwind</span>
+                        <span class="chip chip-sm">Radix UI</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience -->
+    <section class="section section-tinted" id="experience">
+        <div class="container">
+            <h2 class="section-title">Experience</h2>
+
+            <div class="timeline">
+                <div class="card elevation-1 timeline-card">
+                    <div class="timeline-header">
+                        <div>
+                            <h3>TEACH Public Schools</h3>
+                            <p class="timeline-role">Senior Information Technology Coordinator</p>
+                            <p class="timeline-meta">July 2024 - Present</p>
+                            <p class="timeline-role">Information Technology Support Technician</p>
+                            <p class="timeline-meta">July 2021 - July 2024</p>
+                        </div>
+                        <span class="material-symbols-outlined timeline-icon">computer</span>
+                    </div>
+                    <ul class="timeline-list">
+                        <li>Primary technical support for 20+ staff and 500+ students across multiple school sites</li>
+                        <li>Developed mobile device distribution system for 500+ student devices, optimizing allocation by class size, grade level, budget, and E-rate requirements</li>
+                        <li>Leveraged Mosyle MDM to configure, deploy, and manage devices across multiple sites</li>
+                        <li>Identified and mitigated a critical account security breach, implementing enhanced protocols to safeguard 2,700+ users</li>
+                        <li>Collaborate with IT team and vendors to resolve L3 issues and maintain 99.9% uptime</li>
+                    </ul>
+                </div>
+
+                <div class="card elevation-1 timeline-card">
+                    <div class="timeline-header">
+                        <div>
+                            <h3>After-School All-Stars</h3>
+                            <p class="timeline-role">Instruction Lead</p>
+                            <p class="timeline-meta">September 2023 - July 2024</p>
+                        </div>
+                        <span class="material-symbols-outlined timeline-icon">school</span>
+                    </div>
+                    <ul class="timeline-list">
+                        <li>Designed and delivered STEM-focused curriculum for diverse student populations</li>
+                        <li>Created learning activities promoting critical thinking and problem-solving</li>
+                        <li>Adapted instruction methods to meet varied learning styles and needs</li>
+                    </ul>
+                </div>
+
+                <div class="exp-row">
+                    <div class="card elevation-1 timeline-card timeline-card-compact">
+                        <h3>Specialized Attorney Services</h3>
+                        <p class="timeline-role">Process Server</p>
+                        <p class="timeline-meta">Aug 2017 - Sep 2019</p>
+                        <p class="timeline-desc">Executed time-sensitive legal document service with strict procedural adherence and detailed compliance records.</p>
+                    </div>
+                    <div class="card elevation-1 timeline-card timeline-card-compact">
+                        <h3>Absolute Accessory</h3>
+                        <p class="timeline-role">Warehouse Specialist</p>
+                        <p class="timeline-meta">Aug 2015 - Sep 2017</p>
+                        <p class="timeline-desc">Managed warehouse operations, streamlining inventory control and order fulfillment to 99.8% accuracy.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Education & Certs -->
+            <div class="edu-certs-row">
+                <div class="card elevation-1 edu-card">
+                    <h3>Education</h3>
+                    <div class="edu-item">
+                        <span class="material-symbols-outlined">school</span>
+                        <div>
+                            <strong>Western Governors University</strong>
+                            <p>BS, User Experience Design | In Progress</p>
+                        </div>
+                    </div>
+                    <div class="edu-item">
+                        <span class="material-symbols-outlined">school</span>
+                        <div>
+                            <strong>California State University, Los Angeles</strong>
+                            <p>Paralegal Studies | 2019 - 2021 | GPA: 3.5</p>
+                        </div>
+                    </div>
+                    <div class="edu-item">
+                        <span class="material-symbols-outlined">school</span>
+                        <div>
+                            <strong>East Los Angeles College</strong>
+                            <p>AA - Liberal Arts and Sciences | 2009 - 2011</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card elevation-1 cert-card">
+                    <h3>Certifications</h3>
+                    <div class="cert-item">
+                        <span class="material-symbols-outlined">verified</span>
+                        <div>
+                            <strong>Jamf Certified Associate</strong>
+                        </div>
+                    </div>
+                    <div class="cert-item">
+                        <span class="material-symbols-outlined">verified</span>
+                        <div>
+                            <strong>CompTIA Security+ ce</strong>
+                        </div>
+                    </div>
+                    <div class="cert-item">
+                        <span class="material-symbols-outlined">verified</span>
+                        <div>
+                            <strong>WGU Design Foundations</strong>
+                        </div>
+                    </div>
+                    <div class="cert-item">
+                        <span class="material-symbols-outlined">verified</span>
+                        <div>
+                            <strong>WGU Business Power Skills</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="section" id="contact">
+        <div class="container contact-section">
+            <h2 class="section-title">Let's Connect</h2>
+            <p class="contact-text">
+                Whether you're facing a technical challenge or want to talk shop about
+                making technology more accessible, I'd love to hear from you.
+            </p>
+            <div class="contact-links">
+                <a href="mailto:robertmonterroso@gmail.com" class="card elevation-1 contact-card">
+                    <span class="material-symbols-outlined">mail</span>
+                    <strong>Email</strong>
+                    <span class="contact-detail">robertmonterroso@gmail.com</span>
+                </a>
+                <a href="https://www.linkedin.com/in/robert-lee-m-ab16141a1/" target="_blank" rel="noopener" class="card elevation-1 contact-card">
+                    <span class="material-symbols-outlined">person</span>
+                    <strong>LinkedIn</strong>
+                    <span class="contact-detail">Connect with me</span>
+                </a>
+                <a href="https://github.com/pincheleee" target="_blank" rel="noopener" class="card elevation-1 contact-card">
+                    <span class="material-symbols-outlined">code</span>
+                    <strong>GitHub</strong>
+                    <span class="contact-detail">See my code</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Robert Monterroso. Making technology accessible, one solution at a time.</p>
+        </div>
+    </footer>
+
+    <script>
+        const nav = document.getElementById('nav');
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.section').forEach(el => observer.observe(el));
+
+        document.querySelectorAll('a[href^="#"]').forEach(link => {
+            link.addEventListener('click', e => {
+                e.preventDefault();
+                const target = document.querySelector(link.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                    document.getElementById('navLinks').classList.remove('open');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
