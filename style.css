@@ -457,6 +457,71 @@ blockquote {
 
 .project-link:hover { opacity: 0.75; }
 
+/* ── Blog ── */
+.blog-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.blog-card {
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    transition: box-shadow 0.2s var(--ease), transform 0.2s var(--ease);
+}
+
+.blog-card:hover {
+    box-shadow: var(--elevation-2);
+    transform: translateY(-2px);
+}
+
+.blog-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.blog-date {
+    font-size: 0.75rem;
+    color: var(--on-surface-muted);
+}
+
+.blog-tag {
+    font-size: 0.6875rem;
+    font-weight: 500;
+    padding: 4px 12px;
+    border-radius: 100px;
+    background: var(--primary-container);
+    color: var(--on-primary-container);
+}
+
+.blog-card h3 {
+    font-size: 1.05rem;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.blog-card > p {
+    color: var(--on-surface-muted);
+    font-size: 0.875rem;
+    line-height: 1.7;
+    margin-bottom: 20px;
+    flex: 1;
+}
+
+.blog-read-more {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--primary);
+    transition: opacity 0.2s var(--ease);
+}
+
+.blog-read-more:hover { opacity: 0.75; }
+
 /* ── Experience Timeline ── */
 .timeline {
     display: flex;
@@ -658,6 +723,7 @@ blockquote {
     .about-quote { position: static; }
     .skills-grid { grid-template-columns: repeat(2, 1fr); }
     .projects-grid { grid-template-columns: 1fr; }
+    .blog-grid { grid-template-columns: repeat(2, 1fr); }
     .exp-row { grid-template-columns: 1fr; }
     .edu-certs-row { grid-template-columns: 1fr; }
 }
@@ -675,6 +741,7 @@ blockquote {
     .about-quote { position: static; }
     .skills-grid { grid-template-columns: 1fr; }
     .projects-grid { grid-template-columns: 1fr; }
+    .blog-grid { grid-template-columns: 1fr; }
     .exp-row { grid-template-columns: 1fr; }
     .edu-certs-row { grid-template-columns: 1fr; }
 
