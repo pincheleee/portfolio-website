@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Robert Monterroso - Senior IT Coordinator specializing in MDM deployment, security, and making technology accessible.">
     <meta name="author" content="Robert Monterroso">
+    <link rel="canonical" href="https://pinchelee.com">
+    <meta property="og:title" content="Robert Monterroso | Senior IT Coordinator">
+    <meta property="og:description" content="Robert Monterroso - Senior IT Coordinator specializing in MDM deployment, security, and making technology accessible.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://pinchelee.com">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Robert Monterroso | Senior IT Coordinator">
+    <meta name="twitter:description" content="Senior IT Coordinator specializing in MDM deployment, security, and making technology accessible.">
     <title>Robert Monterroso | Senior IT Coordinator</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,6 +21,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <a href="#main" class="skip-link">Skip to main content</a>
 
     <nav class="nav" id="nav">
         <div class="nav-inner">
@@ -24,12 +33,13 @@
                 <a href="#experience">Experience</a>
                 <a href="#contact">Contact</a>
             </div>
-            <button class="nav-toggle" aria-label="Toggle menu" onclick="document.getElementById('navLinks').classList.toggle('open')">
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
                 <span></span><span></span><span></span>
             </button>
         </div>
     </nav>
 
+    <main id="main">
     <!-- Hero -->
     <section class="hero">
         <div class="container">
@@ -137,6 +147,7 @@
                     <span class="chip">Device Deployment</span>
                     <span class="chip">Technical Documentation</span>
                     <span class="chip">Python</span>
+                    <span class="chip">Swift / SwiftUI</span>
                     <span class="chip">Docker</span>
                     <span class="chip">Linux</span>
                     <span class="chip">Node.js</span>
@@ -150,6 +161,27 @@
         <div class="container">
             <h2 class="section-title">Projects</h2>
             <div class="projects-grid">
+
+                <div class="card elevation-1 project-card">
+                    <div class="project-header">
+                        <span class="project-type">Security / macOS</span>
+                        <span class="status status-complete">Complete</span>
+                    </div>
+                    <h3>Advanced Privacy Dashboard</h3>
+                    <p>
+                        macOS privacy and security monitoring app with real-time network
+                        traffic analysis, DNS monitoring, threat detection, firewall management,
+                        VPN detection, and GeoIP lookups. Reads live system data via netstat,
+                        lsof, and TCC databases.
+                    </p>
+                    <div class="chip-group chip-group-sm">
+                        <span class="chip chip-sm">SwiftUI</span>
+                        <span class="chip chip-sm">SQLite</span>
+                        <span class="chip chip-sm">Swift Charts</span>
+                        <span class="chip chip-sm">WidgetKit</span>
+                    </div>
+                    <a href="https://github.com/pincheleee/AdvancedPrivacyDashboard" target="_blank" rel="noopener" class="project-link">View on GitHub</a>
+                </div>
 
                 <div class="card elevation-1 project-card">
                     <div class="project-header">
@@ -189,6 +221,47 @@
                         <span class="chip chip-sm">Alpaca API</span>
                         <span class="chip chip-sm">Multi-LLM</span>
                     </div>
+                    <a href="https://github.com/pincheleee/govbot" target="_blank" rel="noopener" class="project-link">View on GitHub</a>
+                </div>
+
+                <div class="card elevation-1 project-card">
+                    <div class="project-header">
+                        <span class="project-type">Automation / IT</span>
+                        <span class="status status-complete">Complete</span>
+                    </div>
+                    <h3>Aeries Gradebook Audit</h3>
+                    <p>
+                        Python tool that audits elementary school gradebooks via the Aeries
+                        SIS API. Checks for missing grades, missing comments, and unaligned
+                        assignments, then generates Google Sheets reports and sends per-teacher
+                        Gmail notifications automatically.
+                    </p>
+                    <div class="chip-group chip-group-sm">
+                        <span class="chip chip-sm">Python</span>
+                        <span class="chip chip-sm">Aeries API</span>
+                        <span class="chip chip-sm">Google Sheets</span>
+                        <span class="chip chip-sm">Gmail API</span>
+                    </div>
+                </div>
+
+                <div class="card elevation-1 project-card">
+                    <div class="project-header">
+                        <span class="project-type">AI / IT</span>
+                        <span class="status status-complete">Complete</span>
+                    </div>
+                    <h3>IIQ Reply</h3>
+                    <p>
+                        Local LLM chatbot and Incident IQ auto-ticket resolver. Uses Ollama
+                        and OpenAI to automatically draft and resolve help desk tickets,
+                        reducing manual response time for common IT support requests.
+                    </p>
+                    <div class="chip-group chip-group-sm">
+                        <span class="chip chip-sm">Python</span>
+                        <span class="chip chip-sm">Ollama</span>
+                        <span class="chip chip-sm">OpenAI</span>
+                        <span class="chip chip-sm">Incident IQ</span>
+                    </div>
+                    <a href="https://github.com/pincheleee/iiqreply" target="_blank" rel="noopener" class="project-link">View on GitHub</a>
                 </div>
 
                 <div class="card elevation-1 project-card">
@@ -416,6 +489,7 @@
             </div>
         </div>
     </section>
+    </main>
 
     <footer class="footer">
         <div class="container">
@@ -425,6 +499,10 @@
 
     <script>
         const nav = document.getElementById('nav');
+        document.getElementById('navToggle').addEventListener('click', () => {
+            document.getElementById('navLinks').classList.toggle('open');
+        });
+
         window.addEventListener('scroll', () => {
             nav.classList.toggle('scrolled', window.scrollY > 50);
         });
