@@ -3,36 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Robert Monterroso - Senior IT Coordinator specializing in MDM deployment, security, and making technology accessible.">
+    <meta name="description" content="Robert Monterroso - Senior IT Coordinator. I make school tech actually work.">
     <meta name="author" content="Robert Monterroso">
     <link rel="canonical" href="https://pinchelee.com">
-    <meta property="og:title" content="Robert Monterroso | Senior IT Coordinator">
-    <meta property="og:description" content="Robert Monterroso - Senior IT Coordinator specializing in MDM deployment, security, and making technology accessible.">
+    <meta property="og:title" content="Robert Monterroso | I Make School Tech Work">
+    <meta property="og:description" content="Senior IT Coordinator building tools, securing systems, and making technology accessible across multi-site school environments.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://pinchelee.com">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Robert Monterroso | Senior IT Coordinator">
-    <meta name="twitter:description" content="Senior IT Coordinator specializing in MDM deployment, security, and making technology accessible.">
+    <meta name="twitter:title" content="Robert Monterroso | I Make School Tech Work">
+    <meta name="twitter:description" content="Senior IT Coordinator building tools, securing systems, and making technology accessible.">
     <title>Robert Monterroso | Senior IT Coordinator</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <a href="#main" class="skip-link">Skip to main content</a>
 
+    <!-- Scroll Progress -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
     <nav class="nav" id="nav">
         <div class="nav-inner">
             <a href="#" class="nav-logo">RM</a>
             <div class="nav-links" id="navLinks">
-                <a href="#about">About</a>
-                <a href="#skills">Skills</a>
-                <a href="#projects">Projects</a>
-                <a href="#blog">Blog</a>
-                <a href="#experience">Experience</a>
-                <a href="#contact">Contact</a>
+                <a href="#work" data-section="work">Work</a>
+                <a href="#about" data-section="about">About</a>
+                <a href="#experience" data-section="experience">Experience</a>
+                <a href="#contact" data-section="contact">Contact</a>
+                <a href="About Me - Robert Monterroso _ IT Professional.pdf" target="_blank" class="nav-resume">Resume</a>
             </div>
             <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
                 <span></span><span></span><span></span>
@@ -41,52 +43,233 @@
     </nav>
 
     <main id="main">
+
     <!-- Hero -->
     <section class="hero">
-        <div class="container">
-            <p class="hero-label">Senior IT Coordinator</p>
-            <h1 class="hero-title">Robert Monterroso</h1>
-            <p class="hero-subtitle">
-                I make technology accessible. With 5+ years managing devices, securing systems,
-                and supporting users across multi-site school environments, I help organizations
-                get the most out of their tech.
-            </p>
-            <div class="hero-chips">
-                <span class="hero-chip">Jamf Certified</span>
-                <span class="hero-chip">CompTIA Security+</span>
-                <span class="hero-chip">Bilingual EN/ES</span>
+        <div class="container hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">I make school tech<br><span class="hero-accent">actually work.</span></h1>
+                <p class="hero-subtitle">
+                    Senior IT Coordinator managing 500+ devices, securing 2,700+ users,
+                    and building the tools my district didn't know it needed.
+                </p>
+                <div class="hero-actions">
+                    <a href="#work" class="btn-filled">
+                        See My Work
+                    </a>
+                    <a href="#contact" class="btn-outlined">Get in Touch</a>
+                </div>
             </div>
-            <div class="hero-actions">
-                <a href="#contact" class="btn-filled">
-                    <span class="material-symbols-outlined">mail</span>
-                    Get in Touch
-                </a>
-                <a href="#about" class="btn-outlined">Learn More</a>
+            <div class="hero-visual">
+                <div class="hero-stat-grid">
+                    <div class="hero-stat">
+                        <span class="hero-stat-number">500+</span>
+                        <span class="hero-stat-label">Devices Managed</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="hero-stat-number">2,700+</span>
+                        <span class="hero-stat-label">Users Secured</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="hero-stat-number">5+</span>
+                        <span class="hero-stat-label">Years in IT</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="hero-stat-number">9</span>
+                        <span class="hero-stat-label">Projects Shipped</span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- About -->
-    <section class="section" id="about">
+    <!-- Featured Work -->
+    <section class="section" id="work">
         <div class="container">
-            <h2 class="section-title">About</h2>
-            <div class="about-grid">
-                <div class="about-text">
-                    <p class="lead">
-                        I believe technology should empower people, not intimidate them.
+            <h2 class="section-label">Selected Work</h2>
+
+            <!-- Featured Project 1 -->
+            <div class="featured-project">
+                <div class="featured-info">
+                    <div class="featured-meta">
+                        <span class="project-type">Security / macOS</span>
+                        <span class="status status-complete">Complete</span>
+                    </div>
+                    <h3 class="featured-title">Advanced Privacy Dashboard</h3>
+                    <p class="featured-desc">
+                        A full macOS app that monitors your system in real time -- network traffic,
+                        DNS queries, threat detection, firewall rules, VPN status, and GeoIP lookups.
+                        Reads live data from netstat, lsof, and TCC databases. No black boxes.
                     </p>
-                    <p>
-                        Over 5 years in IT, I've advanced from Technician to Senior Coordinator at a
-                        multi-site public school system. I translate user needs into technical solutions,
-                        troubleshoot complex issues, and implement robust security protocols.
-                    </p>
-                    <p>
-                        Skilled in large-scale MDM deployment, system optimization, and cross-functional
-                        collaboration. I bridge the gap between technology and people with patience, clear
-                        communication, and solutions that actually fit how people work.
-                    </p>
+                    <div class="chip-group">
+                        <span class="chip">SwiftUI</span>
+                        <span class="chip">SQLite</span>
+                        <span class="chip">Swift Charts</span>
+                        <span class="chip">WidgetKit</span>
+                    </div>
+                    <a href="https://github.com/pincheleee/AdvancedPrivacyDashboard" target="_blank" rel="noopener" class="project-link">
+                        View on GitHub
+                        <span class="material-symbols-outlined">arrow_outward</span>
+                    </a>
                 </div>
-                <div class="about-quote card elevation-2">
+                <div class="featured-visual">
+                    <div class="featured-placeholder">
+                        <span class="material-symbols-outlined">security</span>
+                        <span>Privacy Dashboard</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Featured Project 2 -->
+            <div class="featured-project featured-project-reverse">
+                <div class="featured-info">
+                    <div class="featured-meta">
+                        <span class="project-type">AI / Finance</span>
+                        <span class="status status-active">Active</span>
+                    </div>
+                    <h3 class="featured-title">Polybot</h3>
+                    <p class="featured-desc">
+                        An AI-powered prediction market trading bot running 24/7 on a Raspberry Pi.
+                        Three-model ensemble (Claude, GPT-4o, DeepSeek) analyzes Polymarket and Kalshi
+                        markets in real time, sizes positions with Kelly Criterion, and manages risk
+                        automatically. Built from scratch in Python.
+                    </p>
+                    <div class="chip-group">
+                        <span class="chip">Python</span>
+                        <span class="chip">AsyncIO</span>
+                        <span class="chip">WebSockets</span>
+                        <span class="chip">Multi-LLM</span>
+                    </div>
+                </div>
+                <div class="featured-visual">
+                    <div class="featured-placeholder">
+                        <span class="material-symbols-outlined">smart_toy</span>
+                        <span>Polybot</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Featured Project 3 -->
+            <div class="featured-project">
+                <div class="featured-info">
+                    <div class="featured-meta">
+                        <span class="project-type">Web Audio</span>
+                        <span class="status status-complete">Complete</span>
+                    </div>
+                    <h3 class="featured-title">Web Audio Synthesizer</h3>
+                    <p class="featured-desc">
+                        A browser-based TR-808 drum machine with a 16-step sequencer and physically
+                        modeled sounds -- kicks, snares, hi-hats, toms, claps. Zero dependencies,
+                        pure Web Audio API with low-latency scheduling. Per-instrument controls,
+                        4 pattern slots, swing, and keyboard shortcuts.
+                    </p>
+                    <div class="chip-group">
+                        <span class="chip">JavaScript</span>
+                        <span class="chip">Web Audio API</span>
+                        <span class="chip">ES6 Modules</span>
+                    </div>
+                    <a href="https://github.com/pincheleee/Web_Audio_Synthesizer" target="_blank" rel="noopener" class="project-link">
+                        View on GitHub
+                        <span class="material-symbols-outlined">arrow_outward</span>
+                    </a>
+                </div>
+                <div class="featured-visual">
+                    <div class="featured-placeholder">
+                        <span class="material-symbols-outlined">music_note</span>
+                        <span>TR-808 Clone</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- More Projects Grid -->
+            <h3 class="more-projects-label">More Projects</h3>
+            <div class="projects-grid">
+                <a href="https://github.com/pincheleee/govbot" target="_blank" rel="noopener" class="mini-project-card">
+                    <div class="mini-project-top">
+                        <span class="material-symbols-outlined">monitoring</span>
+                        <span class="status status-active">Active</span>
+                    </div>
+                    <h4>Govbot</h4>
+                    <p>Equity trading bot exploiting government data publication lag. Scans SAM.gov, SEC EDGAR, Federal Register, and Congress.gov.</p>
+                    <div class="mini-chips">Python / AsyncIO / Alpaca API</div>
+                </a>
+
+                <div class="mini-project-card">
+                    <div class="mini-project-top">
+                        <span class="material-symbols-outlined">grading</span>
+                        <span class="status status-complete">Complete</span>
+                    </div>
+                    <h4>Aeries Gradebook Audit</h4>
+                    <p>Audits elementary gradebooks via Aeries SIS API. Auto-generates Google Sheets reports and per-teacher Gmail alerts.</p>
+                    <div class="mini-chips">Python / Aeries API / Google Workspace</div>
+                </div>
+
+                <a href="https://github.com/pincheleee/iiqreply" target="_blank" rel="noopener" class="mini-project-card">
+                    <div class="mini-project-top">
+                        <span class="material-symbols-outlined">support_agent</span>
+                        <span class="status status-complete">Complete</span>
+                    </div>
+                    <h4>IIQ Reply</h4>
+                    <p>AI chatbot that auto-drafts and resolves Incident IQ help desk tickets using local LLMs and OpenAI.</p>
+                    <div class="mini-chips">FastAPI / Ollama / LangChain</div>
+                </a>
+
+                <a href="https://github.com/pincheleee/youtube-lead-qualifier" target="_blank" rel="noopener" class="mini-project-card">
+                    <div class="mini-project-top">
+                        <span class="material-symbols-outlined">videocam</span>
+                        <span class="status status-progress">In Progress</span>
+                    </div>
+                    <h4>YouTube Lead Qualifier</h4>
+                    <p>AI-powered lead qualification for YouTube monetization consulting. Scores channels with GPT-4 and routes via Telegram.</p>
+                    <div class="mini-chips">Node.js / YouTube API / GPT-4</div>
+                </a>
+
+                <a href="https://github.com/pincheleee/Mobile_Ordering_App" target="_blank" rel="noopener" class="mini-project-card">
+                    <div class="mini-project-top">
+                        <span class="material-symbols-outlined">restaurant</span>
+                        <span class="status status-complete">Prototype</span>
+                    </div>
+                    <h4>Mobile Ordering App</h4>
+                    <p>Campus cafe mobile ordering prototype with accessible components, form validation, and interactive UI.</p>
+                    <div class="mini-chips">React / TypeScript / Tailwind</div>
+                </a>
+
+                <a href="https://github.com/pincheleee/Research_Automation_App" target="_blank" rel="noopener" class="mini-project-card">
+                    <div class="mini-project-top">
+                        <span class="material-symbols-outlined">science</span>
+                        <span class="status status-progress">In Progress</span>
+                    </div>
+                    <h4>Research Automation</h4>
+                    <p>Web scraping to AI processing to Notion pipeline. Handles bulk URLs, auto-transcription, and structured knowledge bases.</p>
+                    <div class="mini-chips">Python / Selenium / Claude API</div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About - Bento Grid -->
+    <section class="section section-tinted" id="about">
+        <div class="container">
+            <h2 class="section-label">About</h2>
+            <div class="bento-grid">
+                <div class="bento-card bento-bio">
+                    <p class="bento-bio-lead">I believe technology should empower people, not intimidate them.</p>
+                    <p>Over 5 years in IT, I've gone from Technician to Senior Coordinator at a multi-site
+                    public school system. I translate user needs into technical solutions and build the tools
+                    that don't exist yet.</p>
+                </div>
+
+                <div class="bento-card bento-currently">
+                    <h3>Currently</h3>
+                    <ul>
+                        <li>Senior IT Coordinator at TEACH Public Schools</li>
+                        <li>Studying UX Design at WGU</li>
+                        <li>Building AI-powered trading bots</li>
+                        <li>Based in Los Angeles, CA</li>
+                    </ul>
+                </div>
+
+                <div class="bento-card bento-quote">
                     <span class="material-symbols-outlined quote-icon">format_quote</span>
                     <blockquote>
                         "During my first week, I was thrown into the deep end -- tasked with fixing
@@ -95,313 +278,44 @@
                         that determination and resourcefulness can solve almost anything."
                     </blockquote>
                 </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Skills -->
-    <section class="section section-tinted" id="skills">
-        <div class="container">
-            <h2 class="section-title">What I Do</h2>
-            <div class="skills-grid">
-                <div class="card elevation-1 skill-card">
-                    <div class="skill-icon">
-                        <span class="material-symbols-outlined">search</span>
-                    </div>
-                    <h3>Problem Solving</h3>
-                    <p>
-                        Creative solutions with the resources at hand. I adapt, improvise, and
-                        find workarounds when perfect solutions aren't available.
-                    </p>
-                </div>
-                <div class="card elevation-1 skill-card">
-                    <div class="skill-icon">
-                        <span class="material-symbols-outlined">hub</span>
-                    </div>
-                    <h3>Systems Thinking</h3>
-                    <p>
-                        I see how the pieces connect. Understanding full system flows lets me
-                        anticipate issues and build smoother experiences.
-                    </p>
-                </div>
-                <div class="card elevation-1 skill-card">
-                    <div class="skill-icon">
-                        <span class="material-symbols-outlined">groups</span>
-                    </div>
-                    <h3>User Advocacy</h3>
-                    <p>
-                        The human element matters as much as the technical fix. I make people
-                        comfortable with technology through empathy and clear communication.
-                    </p>
-                </div>
-            </div>
-
-            <div class="tech-stack">
-                <h3>Technologies & Tools</h3>
-                <div class="chip-group">
-                    <span class="chip">Mosyle MDM</span>
-                    <span class="chip">Windows/macOS/iOS</span>
-                    <span class="chip">Google Workspace Admin</span>
-                    <span class="chip">Freshservice</span>
-                    <span class="chip">Network Troubleshooting (TCP/IP)</span>
-                    <span class="chip">Security Protocols</span>
-                    <span class="chip">Device Deployment</span>
-                    <span class="chip">Technical Documentation</span>
-                    <span class="chip">Python</span>
-                    <span class="chip">Swift / SwiftUI</span>
-                    <span class="chip">Docker</span>
-                    <span class="chip">Linux</span>
-                    <span class="chip">Node.js</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects -->
-    <section class="section" id="projects">
-        <div class="container">
-            <h2 class="section-title">Projects</h2>
-            <div class="projects-grid">
-
-                <div class="card elevation-1 project-card">
-                    <div class="project-header">
-                        <span class="project-type">Security / macOS</span>
-                        <span class="status status-complete">Complete</span>
-                    </div>
-                    <h3>Advanced Privacy Dashboard</h3>
-                    <p>
-                        macOS privacy and security monitoring app with real-time network
-                        traffic analysis, DNS monitoring, threat detection, firewall management,
-                        VPN detection, and GeoIP lookups. Reads live system data via netstat,
-                        lsof, and TCC databases.
-                    </p>
-                    <div class="chip-group chip-group-sm">
-                        <span class="chip chip-sm">SwiftUI</span>
-                        <span class="chip chip-sm">SQLite</span>
-                        <span class="chip chip-sm">Swift Charts</span>
-                        <span class="chip chip-sm">WidgetKit</span>
-                    </div>
-                    <a href="https://github.com/pincheleee/AdvancedPrivacyDashboard" target="_blank" rel="noopener" class="project-link">View on GitHub</a>
-                </div>
-
-                <div class="card elevation-1 project-card">
-                    <div class="project-header">
-                        <span class="project-type">AI / Finance</span>
-                        <span class="status status-active">Active</span>
-                    </div>
-                    <h3>Polybot</h3>
-                    <p>
-                        AI-assisted prediction market bot for Polymarket and Kalshi. Uses a
-                        three-model ensemble (Claude, GPT-4o, DeepSeek) to detect trading edges
-                        in real time, with Kelly Criterion sizing and automated position management.
-                        Deployed on a Raspberry Pi.
-                    </p>
-                    <div class="chip-group chip-group-sm">
-                        <span class="chip chip-sm">Python</span>
-                        <span class="chip chip-sm">AsyncIO</span>
-                        <span class="chip chip-sm">WebSockets</span>
-                        <span class="chip chip-sm">Multi-LLM</span>
+                <div class="bento-card bento-stack">
+                    <h3>Tools & Tech</h3>
+                    <div class="chip-group">
+                        <span class="chip">Mosyle MDM</span>
+                        <span class="chip">Windows/macOS/iOS</span>
+                        <span class="chip">Google Workspace Admin</span>
+                        <span class="chip">Freshservice</span>
+                        <span class="chip">Network (TCP/IP)</span>
+                        <span class="chip">Python</span>
+                        <span class="chip">Swift / SwiftUI</span>
+                        <span class="chip">Docker</span>
+                        <span class="chip">Linux</span>
+                        <span class="chip">Node.js</span>
                     </div>
                 </div>
 
-                <div class="card elevation-1 project-card">
-                    <div class="project-header">
-                        <span class="project-type">AI / Finance</span>
-                        <span class="status status-active">Active</span>
-                    </div>
-                    <h3>Govbot</h3>
-                    <p>
-                        Equity trading bot that exploits government data publication lag.
-                        Scans SAM.gov, SEC EDGAR, Federal Register, and Congress.gov for
-                        signals, resolves companies to tickers, and executes paper trades
-                        via Alpaca with AI-driven analysis.
-                    </p>
-                    <div class="chip-group chip-group-sm">
-                        <span class="chip chip-sm">Python</span>
-                        <span class="chip chip-sm">AsyncIO</span>
-                        <span class="chip chip-sm">Alpaca API</span>
-                        <span class="chip chip-sm">Multi-LLM</span>
-                    </div>
-                    <a href="https://github.com/pincheleee/govbot" target="_blank" rel="noopener" class="project-link">View on GitHub</a>
-                </div>
-
-                <div class="card elevation-1 project-card">
-                    <div class="project-header">
-                        <span class="project-type">Automation / IT</span>
-                        <span class="status status-complete">Complete</span>
-                    </div>
-                    <h3>Aeries Gradebook Audit</h3>
-                    <p>
-                        Python tool that audits elementary school gradebooks via the Aeries
-                        SIS API. Checks for missing grades, missing comments, and unaligned
-                        assignments, then generates Google Sheets reports and sends per-teacher
-                        Gmail notifications automatically.
-                    </p>
-                    <div class="chip-group chip-group-sm">
-                        <span class="chip chip-sm">Python</span>
-                        <span class="chip chip-sm">Aeries API</span>
-                        <span class="chip chip-sm">Google Sheets</span>
-                        <span class="chip chip-sm">Gmail API</span>
+                <div class="bento-card bento-certs">
+                    <h3>Certifications</h3>
+                    <div class="cert-list">
+                        <div class="cert-item">
+                            <span class="material-symbols-outlined">verified</span>
+                            <span>Jamf Certified Associate</span>
+                        </div>
+                        <div class="cert-item">
+                            <span class="material-symbols-outlined">verified</span>
+                            <span>CompTIA Security+ ce</span>
+                        </div>
+                        <div class="cert-item">
+                            <span class="material-symbols-outlined">verified</span>
+                            <span>WGU Design Foundations</span>
+                        </div>
+                        <div class="cert-item">
+                            <span class="material-symbols-outlined">verified</span>
+                            <span>WGU Business Power Skills</span>
+                        </div>
                     </div>
                 </div>
-
-                <div class="card elevation-1 project-card">
-                    <div class="project-header">
-                        <span class="project-type">AI / IT</span>
-                        <span class="status status-complete">Complete</span>
-                    </div>
-                    <h3>IIQ Reply</h3>
-                    <p>
-                        Local LLM chatbot and Incident IQ auto-ticket resolver. Uses Ollama
-                        and OpenAI to automatically draft and resolve help desk tickets,
-                        reducing manual response time for common IT support requests.
-                    </p>
-                    <div class="chip-group chip-group-sm">
-                        <span class="chip chip-sm">Python</span>
-                        <span class="chip chip-sm">Ollama</span>
-                        <span class="chip chip-sm">OpenAI</span>
-                        <span class="chip chip-sm">Incident IQ</span>
-                    </div>
-                    <a href="https://github.com/pincheleee/iiqreply" target="_blank" rel="noopener" class="project-link">View on GitHub</a>
-                </div>
-
-                <div class="card elevation-1 project-card">
-                    <div class="project-header">
-                        <span class="project-type">Automation</span>
-                        <span class="status status-progress">In Progress</span>
-                    </div>
-                    <h3>YouTube Lead Qualifier</h3>
-                    <p>
-                        Automated lead qualification system for YouTube monetization consulting.
-                        Analyzes channel metrics with GPT-4, scores monetization potential,
-                        and routes leads through SMS, email, and Slack notifications with
-                        auto-booking integration.
-                    </p>
-                    <div class="chip-group chip-group-sm">
-                        <span class="chip chip-sm">Node.js</span>
-                        <span class="chip chip-sm">YouTube API</span>
-                        <span class="chip chip-sm">GPT-4</span>
-                        <span class="chip chip-sm">Twilio</span>
-                    </div>
-                    <a href="https://github.com/pincheleee/youtube-lead-qualifier" target="_blank" rel="noopener" class="project-link">View on GitHub</a>
-                </div>
-
-                <div class="card elevation-1 project-card">
-                    <div class="project-header">
-                        <span class="project-type">Automation</span>
-                        <span class="status status-progress">In Progress</span>
-                    </div>
-                    <h3>Research Automation</h3>
-                    <p>
-                        End-to-end research pipeline combining web scraping, AI content
-                        processing, and Notion workspace integration. Handles bulk URL
-                        processing, auto-transcription cleaning, and structured knowledge
-                        base creation via n8n webhooks.
-                    </p>
-                    <div class="chip-group chip-group-sm">
-                        <span class="chip chip-sm">Python</span>
-                        <span class="chip chip-sm">Selenium</span>
-                        <span class="chip chip-sm">Claude API</span>
-                        <span class="chip chip-sm">Notion API</span>
-                    </div>
-                </div>
-
-                <div class="card elevation-1 project-card">
-                    <div class="project-header">
-                        <span class="project-type">Web App</span>
-                        <span class="status status-complete">Complete</span>
-                    </div>
-                    <h3>Web Audio Synthesizer</h3>
-                    <p>
-                        Browser-based TR-808 drum machine with a 16-step sequencer and
-                        physically modeled 808 sounds -- kicks, snares, hi-hats, toms,
-                        and claps. Zero dependencies, pure Web Audio API with low-latency
-                        scheduling.
-                    </p>
-                    <div class="chip-group chip-group-sm">
-                        <span class="chip chip-sm">JavaScript</span>
-                        <span class="chip chip-sm">Web Audio API</span>
-                        <span class="chip chip-sm">ES6 Modules</span>
-                    </div>
-                    <a href="https://github.com/pincheleee/web-audio-synthesizer" target="_blank" rel="noopener" class="project-link">View on GitHub</a>
-                </div>
-
-                <div class="card elevation-1 project-card">
-                    <div class="project-header">
-                        <span class="project-type">Mobile / UI</span>
-                        <span class="status status-complete">Prototype</span>
-                    </div>
-                    <h3>Mobile Ordering App</h3>
-                    <p>
-                        Component library and UI prototype for a mobile food ordering
-                        experience. Built with a modern React stack featuring accessible
-                        components, form validation, interactive charts, and carousel
-                        navigation.
-                    </p>
-                    <div class="chip-group chip-group-sm">
-                        <span class="chip chip-sm">React</span>
-                        <span class="chip chip-sm">TypeScript</span>
-                        <span class="chip chip-sm">Tailwind</span>
-                        <span class="chip chip-sm">Radix UI</span>
-                    </div>
-                    <a href="https://github.com/pincheleee/mobile-ordering-app" target="_blank" rel="noopener" class="project-link">View on GitHub</a>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- Blog -->
-    <section class="section section-tinted" id="blog">
-        <div class="container">
-            <h2 class="section-title">Blog</h2>
-            <div class="blog-grid">
-
-                <article class="card elevation-1 blog-card">
-                    <div class="blog-meta">
-                        <span class="blog-date">February 24, 2026</span>
-                        <span class="blog-tag">Security</span>
-                    </div>
-                    <h3>Lessons from a Real Security Breach in K-12 IT</h3>
-                    <p>
-                        When I discovered a critical account compromise affecting 2,700+ users,
-                        the response had to be immediate and methodical. Here is what I learned
-                        about incident response, communication under pressure, and building
-                        better security protocols from scratch.
-                    </p>
-                    <a href="#" class="blog-read-more">Read more</a>
-                </article>
-
-                <article class="card elevation-1 blog-card">
-                    <div class="blog-meta">
-                        <span class="blog-date">February 10, 2026</span>
-                        <span class="blog-tag">UX Design</span>
-                    </div>
-                    <h3>Applying UX Research to Internal IT Tools</h3>
-                    <p>
-                        Most internal tools are built for functionality, not usability. As I
-                        work through my UX Design degree, I have been applying user research
-                        methods to the IT workflows I manage daily -- and the results have
-                        changed how I think about support.
-                    </p>
-                    <a href="#" class="blog-read-more">Read more</a>
-                </article>
-
-                <article class="card elevation-1 blog-card">
-                    <div class="blog-meta">
-                        <span class="blog-date">January 28, 2026</span>
-                        <span class="blog-tag">MDM</span>
-                    </div>
-                    <h3>Deploying 500+ Devices Without Losing Your Mind</h3>
-                    <p>
-                        Large-scale device rollouts in schools come with constraints most
-                        enterprise environments never face: tight budgets, E-rate compliance,
-                        mixed OS fleets, and users who range from kindergarteners to
-                        administrators. Here is the system I built.
-                    </p>
-                    <a href="#" class="blog-read-more">Read more</a>
-                </article>
-
             </div>
         </div>
     </section>
@@ -409,164 +323,124 @@
     <!-- Experience -->
     <section class="section" id="experience">
         <div class="container">
-            <h2 class="section-title">Experience</h2>
+            <h2 class="section-label">Experience</h2>
 
-            <div class="timeline">
-                <div class="card elevation-1 timeline-card">
-                    <div class="timeline-header">
-                        <div>
-                            <h3>TEACH Public Schools</h3>
-                            <p class="timeline-role">Senior Information Technology Coordinator</p>
-                            <p class="timeline-meta">July 2024 - Present</p>
-                            <p class="timeline-role">Information Technology Support Technician</p>
-                            <p class="timeline-meta">July 2021 - July 2024</p>
-                        </div>
-                        <span class="material-symbols-outlined timeline-icon">computer</span>
+            <div class="exp-primary">
+                <div class="exp-header">
+                    <div>
+                        <h3>TEACH Public Schools</h3>
+                        <p class="exp-range">2021 - Present</p>
                     </div>
-                    <ul class="timeline-list">
-                        <li>Primary technical support for 20+ staff and 500+ students across multiple school sites</li>
-                        <li>Developed mobile device distribution system for 500+ student devices, optimizing allocation by class size, grade level, budget, and E-rate requirements</li>
-                        <li>Leveraged Mosyle MDM to configure, deploy, and manage devices across multiple sites</li>
-                        <li>Identified and mitigated a critical account security breach, implementing enhanced protocols to safeguard 2,700+ users</li>
-                        <li>Collaborate with IT team and vendors to resolve L3 issues and maintain 99.9% uptime</li>
-                    </ul>
                 </div>
-
-                <div class="card elevation-1 timeline-card">
-                    <div class="timeline-header">
-                        <div>
-                            <h3>After-School All-Stars</h3>
-                            <p class="timeline-role">Instruction Lead</p>
-                            <p class="timeline-meta">September 2023 - July 2024</p>
-                        </div>
-                        <span class="material-symbols-outlined timeline-icon">school</span>
+                <div class="exp-roles">
+                    <div class="exp-role">
+                        <span class="exp-role-title">Senior Information Technology Coordinator</span>
+                        <span class="exp-role-date">July 2024 - Present</span>
                     </div>
-                    <ul class="timeline-list">
-                        <li>Designed and delivered STEM-focused curriculum for diverse student populations</li>
-                        <li>Created learning activities promoting critical thinking and problem-solving</li>
-                        <li>Adapted instruction methods to meet varied learning styles and needs</li>
-                    </ul>
+                    <div class="exp-role">
+                        <span class="exp-role-title">Information Technology Support Technician</span>
+                        <span class="exp-role-date">July 2021 - July 2024</span>
+                    </div>
                 </div>
+                <p class="exp-narrative">
+                    Went from Technician to Senior Coordinator in 3 years. I'm the primary tech
+                    support for 20+ staff and 500+ students across multiple sites -- managing device
+                    deployment, MDM configuration, and system security. Built a mobile device distribution
+                    system optimized by class size, grade level, budget, and E-rate requirements.
+                    Identified and led the response to a critical security breach affecting 2,700+ users.
+                </p>
+            </div>
 
-                <div class="exp-row">
-                    <div class="card elevation-1 timeline-card timeline-card-compact">
-                        <h3>Specialized Attorney Services</h3>
-                        <p class="timeline-role">Process Server</p>
-                        <p class="timeline-meta">Aug 2017 - Sep 2019</p>
-                        <p class="timeline-desc">Executed time-sensitive legal document service with strict procedural adherence and detailed compliance records.</p>
-                    </div>
-                    <div class="card elevation-1 timeline-card timeline-card-compact">
-                        <h3>Absolute Accessory</h3>
-                        <p class="timeline-role">Warehouse Specialist</p>
-                        <p class="timeline-meta">Aug 2015 - Sep 2017</p>
-                        <p class="timeline-desc">Managed warehouse operations, streamlining inventory control and order fulfillment to 99.8% accuracy.</p>
-                    </div>
+            <div class="exp-secondary">
+                <div class="exp-compact">
+                    <h4>After-School All-Stars</h4>
+                    <span class="exp-compact-role">Instruction Lead</span>
+                    <span class="exp-compact-date">Sep 2023 - Jul 2024</span>
+                    <p>Designed and delivered STEM curriculum for diverse student populations.</p>
                 </div>
             </div>
 
-            <!-- Education & Certs -->
-            <div class="edu-certs-row">
-                <div class="card elevation-1 edu-card">
-                    <h3>Education</h3>
+            <!-- Education -->
+            <div class="edu-section">
+                <h3 class="edu-heading">Education</h3>
+                <div class="edu-list">
                     <div class="edu-item">
-                        <span class="material-symbols-outlined">school</span>
-                        <div>
-                            <strong>Western Governors University</strong>
-                            <p>BS, User Experience Design | In Progress</p>
-                        </div>
+                        <strong>Western Governors University</strong>
+                        <span>BS, User Experience Design -- In Progress</span>
                     </div>
                     <div class="edu-item">
-                        <span class="material-symbols-outlined">school</span>
-                        <div>
-                            <strong>California State University, Los Angeles</strong>
-                            <p>Paralegal Studies | 2019 - 2021 | GPA: 3.5</p>
-                        </div>
+                        <strong>California State University, Los Angeles</strong>
+                        <span>Paralegal Studies -- GPA 3.5</span>
                     </div>
                     <div class="edu-item">
-                        <span class="material-symbols-outlined">school</span>
-                        <div>
-                            <strong>East Los Angeles College</strong>
-                            <p>AA - Liberal Arts and Sciences | 2009 - 2011</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="card elevation-1 cert-card">
-                    <h3>Certifications</h3>
-                    <div class="cert-item">
-                        <span class="material-symbols-outlined">verified</span>
-                        <div>
-                            <strong>Jamf Certified Associate</strong>
-                        </div>
-                    </div>
-                    <div class="cert-item">
-                        <span class="material-symbols-outlined">verified</span>
-                        <div>
-                            <strong>CompTIA Security+ ce</strong>
-                        </div>
-                    </div>
-                    <div class="cert-item">
-                        <span class="material-symbols-outlined">verified</span>
-                        <div>
-                            <strong>WGU Design Foundations</strong>
-                        </div>
-                    </div>
-                    <div class="cert-item">
-                        <span class="material-symbols-outlined">verified</span>
-                        <div>
-                            <strong>WGU Business Power Skills</strong>
-                        </div>
+                        <strong>East Los Angeles College</strong>
+                        <span>AA, Liberal Arts and Sciences</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact -->
-    <section class="section" id="contact">
+    <!-- Contact - Dark Section -->
+    <section class="section section-dark" id="contact">
         <div class="container contact-section">
-            <h2 class="section-title">Let's Connect</h2>
+            <h2 class="contact-heading">Let's build something.</h2>
             <p class="contact-text">
-                Whether you're facing a technical challenge or want to talk shop about
-                making technology more accessible, I'd love to hear from you.
+                Whether you're facing a technical challenge or want to talk about
+                making technology more accessible -- I'm all ears.
             </p>
             <div class="contact-links">
-                <a href="mailto:robertmonterroso@gmail.com" class="card elevation-1 contact-card">
+                <a href="mailto:robertmonterroso@gmail.com" class="contact-card">
                     <span class="material-symbols-outlined">mail</span>
                     <strong>Email</strong>
                     <span class="contact-detail">robertmonterroso@gmail.com</span>
                 </a>
-                <a href="https://www.linkedin.com/in/robert-lee-m-ab16141a1/" target="_blank" rel="noopener" class="card elevation-1 contact-card">
-                    <span class="material-symbols-outlined">person</span>
+                <a href="https://www.linkedin.com/in/robert-lee-m-ab16141a1/" target="_blank" rel="noopener" class="contact-card">
+                    <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
                     <strong>LinkedIn</strong>
                     <span class="contact-detail">Connect with me</span>
                 </a>
-                <a href="https://github.com/pincheleee" target="_blank" rel="noopener" class="card elevation-1 contact-card">
-                    <span class="material-symbols-outlined">code</span>
+                <a href="https://github.com/pincheleee" target="_blank" rel="noopener" class="contact-card">
+                    <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
                     <strong>GitHub</strong>
                     <span class="contact-detail">See my code</span>
                 </a>
             </div>
+            <a href="About Me - Robert Monterroso _ IT Professional.pdf" target="_blank" class="resume-link">
+                <span class="material-symbols-outlined">description</span>
+                View My Resume
+            </a>
         </div>
     </section>
+
     </main>
 
     <footer class="footer">
-        <div class="container">
-            <p>&copy; 2026 Robert Monterroso. Making technology accessible, one solution at a time.</p>
+        <div class="container footer-inner">
+            <span class="footer-name">Robert Monterroso</span>
+            <span class="footer-copy">&copy; 2026</span>
         </div>
     </footer>
 
     <script>
         const nav = document.getElementById('nav');
+        const navLinks = document.getElementById('navLinks');
+        const scrollProgress = document.getElementById('scrollProgress');
+
+        // Mobile menu toggle
         document.getElementById('navToggle').addEventListener('click', () => {
-            document.getElementById('navLinks').classList.toggle('open');
+            navLinks.classList.toggle('open');
         });
 
+        // Scroll: nav background + progress bar
         window.addEventListener('scroll', () => {
             nav.classList.toggle('scrolled', window.scrollY > 50);
+            const scrolled = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+            scrollProgress.style.transform = `scaleX(${scrolled})`;
         });
 
-        const observer = new IntersectionObserver((entries) => {
+        // Section fade-in
+        const sectionObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
@@ -574,18 +448,79 @@
             });
         }, { threshold: 0.1 });
 
-        document.querySelectorAll('.section').forEach(el => observer.observe(el));
+        document.querySelectorAll('.section').forEach(el => sectionObserver.observe(el));
 
+        // Active nav link
+        const sections = document.querySelectorAll('section[id]');
+        const navItems = document.querySelectorAll('.nav-links a[data-section]');
+
+        const activeObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    navItems.forEach(link => {
+                        link.classList.toggle('active', link.dataset.section === entry.target.id);
+                    });
+                }
+            });
+        }, { threshold: 0.3, rootMargin: '-80px 0px -50% 0px' });
+
+        sections.forEach(section => activeObserver.observe(section));
+
+        // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(link => {
             link.addEventListener('click', e => {
                 e.preventDefault();
                 const target = document.querySelector(link.getAttribute('href'));
                 if (target) {
                     target.scrollIntoView({ behavior: 'smooth' });
-                    document.getElementById('navLinks').classList.remove('open');
+                    navLinks.classList.remove('open');
                 }
             });
         });
+
+        // Staggered card animation
+        const cardObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry, i) => {
+                if (entry.isIntersecting) {
+                    entry.target.style.transitionDelay = `${i * 60}ms`;
+                    entry.target.classList.add('card-visible');
+                    cardObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.mini-project-card, .bento-card').forEach(el => cardObserver.observe(el));
+
+        // Counter animation for hero stats
+        const statObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateStats();
+                    statObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        const statGrid = document.querySelector('.hero-stat-grid');
+        if (statGrid) statObserver.observe(statGrid);
+
+        function animateStats() {
+            document.querySelectorAll('.hero-stat-number').forEach(el => {
+                const text = el.textContent;
+                const num = parseInt(text.replace(/[^0-9]/g, ''));
+                const suffix = text.replace(/[0-9]/g, '');
+                let current = 0;
+                const step = Math.ceil(num / 40);
+                const interval = setInterval(() => {
+                    current += step;
+                    if (current >= num) {
+                        current = num;
+                        clearInterval(interval);
+                    }
+                    el.textContent = current.toLocaleString() + suffix;
+                }, 30);
+            });
+        }
     </script>
 
 </body>
