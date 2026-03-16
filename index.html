@@ -11,9 +11,11 @@
     <meta property="og:description" content="Senior IT Coordinator building tools, securing systems, and making technology accessible across multi-site school environments.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://pinchelee.com">
-    <meta name="twitter:card" content="summary">
+    <meta property="og:image" content="og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Robert Monterroso | I Make School Tech Work">
     <meta name="twitter:description" content="Senior IT Coordinator building tools, securing systems, and making technology accessible.">
+    <meta name="twitter:image" content="og-image.png">
     <title>Robert Monterroso | Senior IT Coordinator</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -34,6 +36,7 @@
                 <a href="#work" data-section="work">Work</a>
                 <a href="#about" data-section="about">About</a>
                 <a href="#experience" data-section="experience">Experience</a>
+                <a href="#blog" data-section="blog">Blog</a>
                 <a href="#contact" data-section="contact">Contact</a>
                 <a href="robert-monterroso-resume.pdf" target="_blank" rel="noopener" class="nav-resume">Resume</a>
             </div>
@@ -102,9 +105,10 @@
                     </div>
                     <h3 class="featured-title">Advanced Privacy Dashboard</h3>
                     <p class="featured-desc">
-                        A full macOS app that monitors your system in real time -- network traffic,
-                        DNS queries, threat detection, firewall rules, VPN status, and GeoIP lookups.
-                        Reads live data from netstat, lsof, and TCC databases. No black boxes.
+                        A full macOS app with 16 services monitoring your system in real time -- network traffic,
+                        DNS queries, threat detection, firewall rules, VPN status, GeoIP lookups, and HIBP breach
+                        checking. Reads live data from netstat, lsof, and TCC databases. Includes a WidgetKit
+                        extension for at-a-glance status. No black boxes.
                     </p>
                     <div class="chip-group">
                         <span class="chip">SwiftUI</span>
@@ -440,6 +444,33 @@
         </div>
     </section>
 
+    <!-- Blog -->
+    <section class="section section-tinted" id="blog">
+        <div class="container">
+            <h2 class="section-label">Blog</h2>
+            <div class="blog-grid">
+                <a href="#" class="blog-card">
+                    <span class="blog-date">March 2026</span>
+                    <h3 class="blog-title">Lessons from Managing 500+ Devices Across Multiple School Sites</h3>
+                    <p class="blog-excerpt">What I learned scaling device management, MDM configuration, and security protocols across a growing public school system -- and the tools I built along the way.</p>
+                    <span class="blog-read-more">Read more <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span></span>
+                </a>
+                <a href="#" class="blog-card">
+                    <span class="blog-date">February 2026</span>
+                    <h3 class="blog-title">Building AI Bots That Run 24/7 on a Raspberry Pi</h3>
+                    <p class="blog-excerpt">How I designed and deployed multiple AI-powered trading bots to a $35 computer -- covering architecture decisions, async Python patterns, and remote monitoring with Telegram.</p>
+                    <span class="blog-read-more">Read more <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span></span>
+                </a>
+                <a href="#" class="blog-card">
+                    <span class="blog-date">January 2026</span>
+                    <h3 class="blog-title">Why I'm Studying UX Design as an IT Professional</h3>
+                    <p class="blog-excerpt">The overlap between IT support and user experience is bigger than most people think. Here's why understanding design principles makes me a better technologist.</p>
+                    <span class="blog-read-more">Read more <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span></span>
+                </a>
+            </div>
+        </div>
+    </section>
+
     <!-- Contact - Dark Section -->
     <section class="section section-dark" id="contact">
         <div class="container contact-section">
@@ -573,7 +604,7 @@
         });
 
         // Staggered card animation (uses DOM index, not batch index)
-        const allCards = document.querySelectorAll('.mini-project-card, .bento-card');
+        const allCards = document.querySelectorAll('.mini-project-card, .bento-card, .blog-card');
         allCards.forEach((el, index) => {
             el.dataset.cardIndex = index % 6;
         });

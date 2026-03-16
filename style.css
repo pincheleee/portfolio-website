@@ -809,6 +809,85 @@ blockquote {
     color: var(--on-surface-muted);
 }
 
+/* ── Blog ── */
+.blog-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+.blog-card {
+    background: var(--surface-card);
+    border: 1px solid var(--outline-variant);
+    border-radius: var(--radius);
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    color: var(--on-surface);
+    transition: box-shadow 0.3s var(--ease), transform 0.3s var(--ease), border-color 0.3s var(--ease);
+}
+
+.blog-card:hover {
+    box-shadow: var(--elevation-2);
+    transform: translateY(-3px);
+    border-color: var(--primary);
+}
+
+.blog-date {
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--primary);
+    margin-bottom: 12px;
+}
+
+.blog-title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1.4;
+    margin-bottom: 12px;
+    color: var(--on-surface);
+}
+
+.blog-excerpt {
+    color: var(--on-surface-muted);
+    font-size: 0.875rem;
+    line-height: 1.7;
+    margin-bottom: 20px;
+    flex-grow: 1;
+}
+
+.blog-read-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--primary);
+    transition: gap 0.2s var(--ease);
+}
+
+.blog-card:hover .blog-read-more {
+    gap: 8px;
+}
+
+.blog-read-more .material-symbols-outlined {
+    font-size: 16px;
+}
+
+.js-enabled .blog-card {
+    opacity: 0;
+    transform: translateY(16px);
+}
+
+.js-enabled .blog-card.card-visible {
+    opacity: 1;
+    transform: none;
+    transition: opacity 0.5s var(--ease), transform 0.5s var(--ease), box-shadow 0.3s var(--ease), border-color 0.3s var(--ease);
+}
+
 /* ── Contact - Dark ── */
 .section-dark {
     background: var(--dark-bg);
@@ -940,6 +1019,7 @@ blockquote {
     .featured-project-reverse { direction: ltr; }
     .featured-visual { max-height: 300px; }
     .projects-grid { grid-template-columns: repeat(2, 1fr); }
+    .blog-grid { grid-template-columns: repeat(2, 1fr); }
     .bento-grid { grid-template-columns: repeat(2, 1fr); }
     .bento-bio { grid-column: span 2; }
     .bento-quote { grid-column: span 2; }
@@ -959,6 +1039,7 @@ blockquote {
     .featured-title { font-size: 1.375rem; }
 
     .projects-grid { grid-template-columns: 1fr; }
+    .blog-grid { grid-template-columns: 1fr; }
 
     .bento-grid { grid-template-columns: 1fr; }
     .bento-bio { grid-column: span 1; }
@@ -1003,13 +1084,15 @@ blockquote {
 
     .js-enabled .section,
     .js-enabled .mini-project-card,
-    .js-enabled .bento-card {
+    .js-enabled .bento-card,
+    .js-enabled .blog-card {
         opacity: 1 !important;
         transform: none !important;
     }
 
     .hero-stat:hover,
     .mini-project-card:hover,
+    .blog-card:hover,
     .contact-card:hover,
     .btn-filled:hover {
         transform: none !important;
@@ -1020,7 +1103,8 @@ blockquote {
 @media print {
     .js-enabled .section,
     .js-enabled .mini-project-card,
-    .js-enabled .bento-card {
+    .js-enabled .bento-card,
+    .js-enabled .blog-card {
         opacity: 1 !important;
         transform: none !important;
     }
