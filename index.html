@@ -138,11 +138,12 @@
                     </div>
                     <h3 class="featured-title">Polybot</h3>
                     <p class="featured-desc">
-                        AI-powered prediction market bot running 24/7 on a Raspberry Pi. Three-tier
-                        detection system: a 45-second sniper catches obvious mispricings instantly,
-                        an RSS fast lane reacts to breaking news in 2 minutes, and a full AI pipeline
-                        (DeepSeek) evaluates deeper opportunities every 5 minutes. Sizes positions with
-                        Kelly Criterion, manages exits with trailing stops, and sends real-time Telegram alerts.
+                        AI-assisted prediction market trading bot running 24/7 on a Raspberry Pi. ~25,400 lines,
+                        249 tests, multi-exchange support with Polymarket focus. Three-tier detection pipeline:
+                        a 45-second sniper catches obvious mispricings, an RSS fast lane reacts to breaking news
+                        in 2 minutes, and a full AI pipeline evaluates deeper opportunities every 5 minutes. Sizes
+                        positions with Kelly Criterion, manages exits with trailing stops, and sends real-time
+                        Telegram alerts. Paper trading mode for proof of concept.
                     </p>
                     <div class="chip-group">
                         <span class="chip">Python</span>
@@ -205,7 +206,7 @@
                         <span class="status status-active">Active</span>
                     </div>
                     <h4>Govbot</h4>
-                    <p>Equity trading bot exploiting government data publication lag. Scans SAM.gov, SEC EDGAR, Federal Register, and Congress.gov.</p>
+                    <p>AI equity trading bot exploiting government data publication lag. 4 data feeds (SAM.gov, SEC EDGAR, Federal Register, Congress.gov), ensemble AI analysis, fail-closed market cap filter.</p>
                     <div class="mini-chips">Python / AsyncIO / Alpaca API</div>
                 </div>
 
@@ -235,7 +236,7 @@
                         <span class="status status-progress">In Progress</span>
                     </div>
                     <h4>YouTube Lead Qualifier</h4>
-                    <p>AI-powered lead qualification for YouTube monetization consulting. Scores channels with GPT-4 and routes via Telegram.</p>
+                    <p>AI-powered lead qualification for YouTube monetization consulting. YouTube Data API, GPT-4o channel scoring, Telegram bot interface, multi-channel notifications.</p>
                     <div class="mini-chips">Node.js / YouTube API / GPT-4</div>
                 </a>
 
@@ -265,7 +266,7 @@
                         <span class="status status-complete">Complete</span>
                     </div>
                     <h4>Local RAG App</h4>
-                    <p>Privacy-first RAG pipeline with agentic ReAct mode. Upload PDFs, ask questions, get grounded answers -- all local, no data leaves your machine.</p>
+                    <p>Local RAG pipeline with agentic ReAct reasoning loop. Upload PDFs, FAISS vector search, 3 tools for multi-step reasoning -- all local, no data leaves your machine.</p>
                     <div class="mini-chips">Python / FAISS / Ollama / Flask</div>
                 </a>
 
@@ -285,7 +286,7 @@
                         <span class="status status-active">Active</span>
                     </div>
                     <h4>FDA Bot</h4>
-                    <p>Biotech trading bot monitoring PDUFA dates, clinical trials, and FDA advisory committees. 10 signal types with ETF fallback logic.</p>
+                    <p>AI FDA/biotech event trading bot. PDUFA calendar, ClinicalTrials.gov, FDA approvals, advisory committees. 10 signal types, atomic writes, AI response clamping.</p>
                     <div class="mini-chips">Python / openFDA / ClinicalTrials.gov / Alpaca</div>
                 </div>
 
@@ -295,7 +296,7 @@
                         <span class="status status-active">Active</span>
                     </div>
                     <h4>Insider Bot</h4>
-                    <p>Mirrors SEC insider trades by parsing Form 4 filings in real time. Detects cluster buys, C-suite purchases, and 10b5-1 plan activity.</p>
+                    <p>SEC insider trading mirror bot. Form 4 parser, cluster buy detection, 10b5-1 plan filtering, SEC-compliant User-Agent validation. 4 signal types.</p>
                     <div class="mini-chips">Python / SEC EDGAR / Alpaca</div>
                 </div>
 
@@ -305,7 +306,7 @@
                         <span class="status status-active">Active</span>
                     </div>
                     <h4>USDA Bot</h4>
-                    <p>Commodity ETF trading bot with a seasonality engine. Scans WASDE reports, crop progress, export data, cattle inventory, and drought conditions.</p>
+                    <p>USDA commodities trading bot with a DST-aware seasonality engine. WASDE, crop progress, export data, cattle inventory, and weather feeds. 12 signal types.</p>
                     <div class="mini-chips">Python / USDA NASS / NOAA / Alpaca</div>
                 </div>
             </div>
