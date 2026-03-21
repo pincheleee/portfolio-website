@@ -52,7 +52,7 @@
     <section class="hero" aria-label="Introduction">
         <div class="container hero-container">
             <div class="hero-content">
-                <h1 class="hero-title">I make school tech<br><span class="hero-accent">actually work.</span></h1>
+                <h1 class="hero-title">I make school tech work —<br><span class="hero-accent">and build AI tools that didn't exist yet.</span></h1>
                 <p class="hero-subtitle">
                     Senior IT Coordinator managing 500+ devices, supporting 320+ users,
                     and building the tools my district didn't know it needed.
@@ -169,30 +169,32 @@
             <div class="featured-project">
                 <div class="featured-info">
                     <div class="featured-meta">
-                        <span class="project-type">Web Audio</span>
-                        <span class="status status-complete">Complete</span>
+                        <span class="project-type">AI / SaaS</span>
+                        <span class="status status-progress">In Progress</span>
                     </div>
-                    <h3 class="featured-title">Web Audio Synthesizer</h3>
+                    <h3 class="featured-title">PromptForge</h3>
                     <p class="featured-desc">
-                        A browser-based TR-808 drum machine with a 16-step sequencer and physically
-                        modeled sounds -- kicks, snares, hi-hats, toms, claps. Zero dependencies,
-                        pure Web Audio API with low-latency scheduling. Per-instrument controls,
-                        4 pattern slots, swing, and keyboard shortcuts.
+                        Prompt optimizer and AI model comparison SaaS. Rewrite prompts with one click,
+                        then compare outputs across GPT-4o, Claude, and Gemini side by side. Full-stack
+                        product with a React web app, Chrome extension, and Cloudflare Workers backend.
+                        JWT auth, D1 database, per-endpoint cost modeling, and a tiered pricing plan.
                     </p>
                     <div class="chip-group">
-                        <span class="chip">JavaScript</span>
-                        <span class="chip">Web Audio API</span>
-                        <span class="chip">ES6 Modules</span>
+                        <span class="chip">React</span>
+                        <span class="chip">Hono</span>
+                        <span class="chip">Cloudflare Workers</span>
+                        <span class="chip">D1</span>
+                        <span class="chip">Chrome Extension</span>
                     </div>
-                    <a href="https://github.com/pincheleee/Web_Audio_Synthesizer" target="_blank" rel="noopener" class="project-link">
-                        View on GitHub
-                        <span class="material-symbols-outlined" aria-hidden="true">arrow_outward</span>
-                    </a>
+                    <span class="project-link project-link-private">
+                        <span class="material-symbols-outlined" aria-hidden="true">lock</span>
+                        Private Repository
+                    </span>
                 </div>
                 <div class="featured-visual">
                     <div class="featured-placeholder">
-                        <span class="material-symbols-outlined" aria-hidden="true">music_note</span>
-                        <span>TR-808 Clone</span>
+                        <span class="material-symbols-outlined" aria-hidden="true">auto_fix_high</span>
+                        <span>PromptForge</span>
                     </div>
                 </div>
             </div>
@@ -200,6 +202,26 @@
             <!-- More Projects Grid -->
             <h3 class="more-projects-label">More Projects</h3>
             <div class="projects-grid">
+                <a href="https://github.com/pincheleee/prompt-eval-cli" target="_blank" rel="noopener" class="mini-project-card">
+                    <div class="mini-project-top">
+                        <span class="material-symbols-outlined" aria-hidden="true">compare</span>
+                        <span class="status status-complete">Complete</span>
+                    </div>
+                    <h4>Prompt Eval CLI</h4>
+                    <p>Run the same prompt across 12+ LLMs in parallel, auto-score with a judge model, and diff results. One dependency.</p>
+                    <div class="mini-chips">Python / httpx / Multi-LLM</div>
+                </a>
+
+                <a href="https://github.com/pincheleee/Local_RAG_App" target="_blank" rel="noopener" class="mini-project-card">
+                    <div class="mini-project-top">
+                        <span class="material-symbols-outlined" aria-hidden="true">description</span>
+                        <span class="status status-complete">Complete</span>
+                    </div>
+                    <h4>Local RAG App</h4>
+                    <p>Local RAG pipeline with agentic ReAct reasoning loop. Upload PDFs, FAISS vector search, 3 tools for multi-step reasoning -- all local, no data leaves your machine.</p>
+                    <div class="mini-chips">Python / FAISS / Ollama / Flask</div>
+                </a>
+
                 <a href="https://github.com/pincheleee/grabby-app" target="_blank" rel="noopener" class="mini-project-card">
                     <div class="mini-project-top">
                         <span class="material-symbols-outlined" aria-hidden="true">download</span>
@@ -212,16 +234,6 @@
 
                 <div class="mini-project-card mini-project-card-static">
                     <div class="mini-project-top">
-                        <span class="material-symbols-outlined" aria-hidden="true">monitoring</span>
-                        <span class="status status-active">Active</span>
-                    </div>
-                    <h4>Govbot</h4>
-                    <p>AI equity trading bot exploiting government data publication lag. 4 data feeds (SAM.gov, SEC EDGAR, Federal Register, Congress.gov), ensemble AI analysis, fail-closed market cap filter.</p>
-                    <div class="mini-chips">Python / AsyncIO / Alpaca API</div>
-                </div>
-
-                <div class="mini-project-card mini-project-card-static">
-                    <div class="mini-project-top">
                         <span class="material-symbols-outlined" aria-hidden="true">grading</span>
                         <span class="status status-complete">Complete</span>
                     </div>
@@ -229,6 +241,16 @@
                     <p>Audits elementary gradebooks via Aeries SIS API. Auto-generates Google Sheets reports and per-teacher Gmail alerts.</p>
                     <div class="mini-chips">Python / Aeries API / Google Workspace</div>
                 </div>
+
+                <a href="https://github.com/pincheleee/Research_Automation_App" target="_blank" rel="noopener" class="mini-project-card">
+                    <div class="mini-project-top">
+                        <span class="material-symbols-outlined" aria-hidden="true">science</span>
+                        <span class="status status-progress">In Progress</span>
+                    </div>
+                    <h4>Research Automation</h4>
+                    <p>Web scraping to AI processing to Notion pipeline. Handles bulk URLs, auto-transcription, and structured knowledge bases.</p>
+                    <div class="mini-chips">Python / Selenium / Claude API</div>
+                </a>
 
                 <a href="https://github.com/pincheleee/iiqreply" target="_blank" rel="noopener" class="mini-project-card">
                     <div class="mini-project-top">
@@ -238,6 +260,16 @@
                     <h4>IIQ Reply</h4>
                     <p>AI chatbot that auto-drafts and resolves Incident IQ help desk tickets using local LLMs and OpenAI.</p>
                     <div class="mini-chips">FastAPI / Ollama / LangChain</div>
+                </a>
+
+                <a href="https://github.com/pincheleee/Web_Audio_Synthesizer" target="_blank" rel="noopener" class="mini-project-card">
+                    <div class="mini-project-top">
+                        <span class="material-symbols-outlined" aria-hidden="true">music_note</span>
+                        <span class="status status-complete">Complete</span>
+                    </div>
+                    <h4>Web Audio Synthesizer</h4>
+                    <p>Browser-based TR-808 drum machine with a 16-step sequencer and physically modeled sounds. Zero dependencies, pure Web Audio API with low-latency scheduling.</p>
+                    <div class="mini-chips">JavaScript / Web Audio API / ES6 Modules</div>
                 </a>
 
                 <a href="https://github.com/pincheleee/youtube-lead-qualifier" target="_blank" rel="noopener" class="mini-project-card">
@@ -260,64 +292,14 @@
                     <div class="mini-chips">React / TypeScript / Tailwind</div>
                 </a>
 
-                <a href="https://github.com/pincheleee/Research_Automation_App" target="_blank" rel="noopener" class="mini-project-card">
-                    <div class="mini-project-top">
-                        <span class="material-symbols-outlined" aria-hidden="true">science</span>
-                        <span class="status status-progress">In Progress</span>
-                    </div>
-                    <h4>Research Automation</h4>
-                    <p>Web scraping to AI processing to Notion pipeline. Handles bulk URLs, auto-transcription, and structured knowledge bases.</p>
-                    <div class="mini-chips">Python / Selenium / Claude API</div>
-                </a>
-
-                <a href="https://github.com/pincheleee/Local_RAG_App" target="_blank" rel="noopener" class="mini-project-card">
-                    <div class="mini-project-top">
-                        <span class="material-symbols-outlined" aria-hidden="true">description</span>
-                        <span class="status status-complete">Complete</span>
-                    </div>
-                    <h4>Local RAG App</h4>
-                    <p>Local RAG pipeline with agentic ReAct reasoning loop. Upload PDFs, FAISS vector search, 3 tools for multi-step reasoning -- all local, no data leaves your machine.</p>
-                    <div class="mini-chips">Python / FAISS / Ollama / Flask</div>
-                </a>
-
-                <a href="https://github.com/pincheleee/prompt-eval-cli" target="_blank" rel="noopener" class="mini-project-card">
-                    <div class="mini-project-top">
-                        <span class="material-symbols-outlined" aria-hidden="true">compare</span>
-                        <span class="status status-complete">Complete</span>
-                    </div>
-                    <h4>Prompt Eval CLI</h4>
-                    <p>Run the same prompt across 12+ LLMs in parallel, auto-score with a judge model, and diff results. One dependency.</p>
-                    <div class="mini-chips">Python / httpx / Multi-LLM</div>
-                </a>
-
                 <div class="mini-project-card mini-project-card-static">
                     <div class="mini-project-top">
-                        <span class="material-symbols-outlined" aria-hidden="true">biotech</span>
+                        <span class="material-symbols-outlined" aria-hidden="true">monitoring</span>
                         <span class="status status-active">Active</span>
                     </div>
-                    <h4>FDA Bot</h4>
-                    <p>AI FDA/biotech event trading bot. PDUFA calendar, ClinicalTrials.gov, FDA approvals, advisory committees. 10 signal types, atomic writes, AI response clamping.</p>
-                    <div class="mini-chips">Python / openFDA / ClinicalTrials.gov / Alpaca</div>
-                </div>
-
-                <div class="mini-project-card mini-project-card-static">
-                    <div class="mini-project-top">
-                        <span class="material-symbols-outlined" aria-hidden="true">person_search</span>
-                        <span class="status status-active">Active</span>
-                    </div>
-                    <h4>Insider Bot</h4>
-                    <p>SEC insider trading mirror bot. Form 4 parser, cluster buy detection, 10b5-1 plan filtering, SEC-compliant User-Agent validation. 4 signal types.</p>
-                    <div class="mini-chips">Python / SEC EDGAR / Alpaca</div>
-                </div>
-
-                <div class="mini-project-card mini-project-card-static">
-                    <div class="mini-project-top">
-                        <span class="material-symbols-outlined" aria-hidden="true">agriculture</span>
-                        <span class="status status-active">Active</span>
-                    </div>
-                    <h4>USDA Bot</h4>
-                    <p>USDA commodities trading bot with a DST-aware seasonality engine. WASDE, crop progress, export data, cattle inventory, and weather feeds. 12 signal types.</p>
-                    <div class="mini-chips">Python / USDA NASS / NOAA / Alpaca</div>
+                    <h4>AI Trading Bot Suite</h4>
+                    <p>Four AI-powered equity trading bots targeting different data edges -- government publications, FDA/biotech events, SEC insider filings, and USDA commodities. Ensemble AI analysis, fail-closed filters, atomic writes.</p>
+                    <div class="mini-chips">Python / AsyncIO / Alpaca / SEC EDGAR / openFDA</div>
                 </div>
             </div>
         </div>
@@ -338,6 +320,7 @@
                 <div class="bento-card bento-currently">
                     <h3>Currently</h3>
                     <ul>
+                        <li>Transitioning into AI/ML and applied AI engineering</li>
                         <li>Senior IT Coordinator at TEACH Public Schools</li>
                         <li>Studying UX Design at WGU</li>
                         <li>Building AI-powered trading bots</li>
