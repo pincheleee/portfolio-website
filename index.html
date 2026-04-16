@@ -286,12 +286,32 @@
 
                 <div class="mini-project-card mini-project-card-static">
                     <div class="mini-project-top">
+                        <span class="material-symbols-outlined" aria-hidden="true">hub</span>
+                        <span class="status status-complete">Complete</span>
+                    </div>
+                    <h4>Aeries MCP Server</h4>
+                    <p>Model Context Protocol server exposing Aeries Student Information System data to Claude Code. FERPA-safe logging, input validation, and schema-typed tools. Built for K-12 IT automation.</p>
+                    <div class="mini-chips">Python / MCP / Aeries API / uv</div>
+                </div>
+
+                <div class="mini-project-card mini-project-card-static">
+                    <div class="mini-project-top">
+                        <span class="material-symbols-outlined" aria-hidden="true">schema</span>
+                        <span class="status status-active">Active</span>
+                    </div>
+                    <h4>Local Orchestrator</h4>
+                    <p>Local AI task orchestrator that uses an Ollama-hosted LLM (DeepSeek R1 / Qwen 2.5) as the planner and dispatches work to Claude Code and Cowork-style executors. SQLite task queue, interactive CLI, executor lifecycle control.</p>
+                    <div class="mini-chips">Python / Ollama / SQLite / Claude Code</div>
+                </div>
+
+                <div class="mini-project-card mini-project-card-static">
+                    <div class="mini-project-top">
                         <span class="material-symbols-outlined" aria-hidden="true">monitoring</span>
                         <span class="status status-active">Active</span>
                     </div>
                     <h4>AI Trading Bot Suite</h4>
-                    <p>Four AI-powered equity trading bots targeting different data edges -- government publications, FDA/biotech events, SEC insider filings, and USDA commodities. Ensemble AI analysis, fail-closed filters, atomic writes.</p>
-                    <div class="mini-chips">Python / AsyncIO / Alpaca / SEC EDGAR / openFDA</div>
+                    <p>Five AI-powered paper-trading bots targeting different data edges -- FDA drug approvals, SEC insider Form 4s, USDA commodity releases, federal contracts and filings, and Polymarket prediction mispricings. Shared architecture: poll, filter, AI ensemble, fail-closed risk logic.</p>
+                    <div class="mini-chips">Python / AsyncIO / Alpaca / SEC EDGAR / openFDA / Polymarket</div>
                 </div>
             </div>
         </div>
@@ -435,6 +455,12 @@
         <div class="container">
             <h2 class="section-label">Blog</h2>
             <div class="blog-grid">
+                <a href="blog/i-built-a-trading-bot-and-it-lost.html" class="blog-card">
+                    <span class="blog-date">April 2026</span>
+                    <h3 class="blog-title">I Built a 27,000-Line Trading Bot and It Lost Every Dollar</h3>
+                    <p class="blog-excerpt">A post-mortem on Polybot -- an AI prediction-market bot that reported 140% returns for weeks, until I found the one-line bug that made every trade a phantom.</p>
+                    <span class="blog-read-more">Read more <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span></span>
+                </a>
                 <a href="blog/forge-ai-launch.html" class="blog-card">
                     <span class="blog-date">March 2026</span>
                     <h3 class="blog-title">I Built a SaaS and Chrome Extension in One Session</h3>
@@ -447,7 +473,7 @@
                     <p class="blog-excerpt">What I learned scaling device management, MDM configuration, and security protocols across a growing public school system -- and the tools I built along the way.</p>
                     <span class="blog-read-more">Read more <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span></span>
                 </a>
-                <a href="#" class="blog-card">
+                <a href="blog/ai-bots-on-a-raspberry-pi.html" class="blog-card">
                     <span class="blog-date">February 2026</span>
                     <h3 class="blog-title">Building AI Bots That Run 24/7 on a Raspberry Pi</h3>
                     <p class="blog-excerpt">How I designed and deployed multiple AI-powered trading bots to a $35 computer -- covering architecture decisions, async Python patterns, and remote monitoring with Telegram.</p>

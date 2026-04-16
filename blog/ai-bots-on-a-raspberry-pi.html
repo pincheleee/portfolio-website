@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Building AI Bots That Run 24/7 on a Raspberry Pi - Robert Monterroso</title>
+    <meta name="description" content="How I designed and deployed an AI-powered prediction-market trading bot to a $35 computer — covering architecture decisions, async Python patterns, and remote monitoring with Telegram.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        .blog-post { max-width: 720px; margin: 0 auto; padding: 3rem 1.5rem 6rem; }
+        .blog-post-back { display: inline-flex; align-items: center; gap: 0.25rem; color: var(--primary); font-size: 0.9rem; font-weight: 500; text-decoration: none; margin-bottom: 2.5rem; }
+        .blog-post-back:hover { text-decoration: underline; }
+        .blog-post-date { font-size: 0.85rem; color: var(--on-surface-muted); margin-bottom: 0.75rem; }
+        .blog-post-title { font-size: 2.2rem; font-weight: 700; line-height: 1.2; letter-spacing: -0.02em; color: var(--on-surface); margin-bottom: 1.5rem; }
+        .blog-post-hero { width: 100%; border-radius: var(--radius-sm); margin-bottom: 2rem; box-shadow: var(--elevation-2); }
+        .blog-post-body { font-size: 1.05rem; line-height: 1.75; color: var(--on-surface); }
+        .blog-post-body h2 { font-size: 1.4rem; font-weight: 600; margin: 2.5rem 0 1rem; letter-spacing: -0.01em; }
+        .blog-post-body p { margin-bottom: 1.25rem; }
+        .blog-post-body ul { margin: 0 0 1.25rem 1.5rem; }
+        .blog-post-body li { margin-bottom: 0.5rem; }
+        .blog-post-body a { color: var(--primary); text-decoration: none; }
+        .blog-post-body a:hover { text-decoration: underline; }
+        .blog-post-body strong { font-weight: 600; }
+        .blog-post-body .callout {
+            background: var(--primary-soft);
+            border-left: 3px solid var(--primary);
+            padding: 1rem 1.25rem;
+            border-radius: 0 var(--radius-xs) var(--radius-xs) 0;
+            margin: 1.5rem 0;
+            font-size: 0.95rem;
+        }
+        .blog-post-body code {
+            background: rgba(0,0,0,0.06);
+            padding: 0.15em 0.4em;
+            border-radius: 4px;
+            font-size: 0.9em;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+        }
+        .blog-post-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--outline); }
+        .blog-post-tags span {
+            font-size: 0.8rem;
+            padding: 0.3rem 0.75rem;
+            background: var(--primary-container);
+            color: var(--on-primary-container);
+            border-radius: 999px;
+            font-weight: 500;
+        }
+        @media (max-width: 640px) {
+            .blog-post-title { font-size: 1.6rem; }
+            .blog-post-body { font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <article class="blog-post">
+        <a href="../index.html#blog" class="blog-post-back">
+            <span class="material-symbols-outlined" aria-hidden="true">arrow_back</span>
+            Back to portfolio
+        </a>
+
+        <p class="blog-post-date">February 2026</p>
+        <h1 class="blog-post-title">Building AI Bots That Run 24/7 on a Raspberry Pi</h1>
+
+        <div class="blog-post-body">
+            <p>For the last couple of months I've been running <strong>Polybot</strong> — an AI-powered prediction-market trading bot — continuously on a Raspberry Pi 5 sitting on my desk. It scans <a href="https://polymarket.com">Polymarket</a>, finds markets where the crowd has priced something obviously wrong, and buys the correct side. Total cost to run: about $21 a month in API fees plus whatever the Pi pulls from the wall.</p>
+
+            <p>This post is about how that actually works — the architecture, the async Python patterns, and the operational stuff that makes "runs 24/7 on a $35 computer" a real claim instead of a bumper sticker.</p>
+
+            <div class="callout">
+                <strong>Context:</strong> Polybot is in paper-trading mode as I validate its edge before moving real capital. Everything in this post is how it runs today. Nothing here is financial advice — prediction markets are efficient and consistent alpha is rare.
+            </div>
+
+            <h2>Why a Pi?</h2>
+
+            <p>I could have dropped it on a $5/month VPS. I chose the Pi for three reasons. First, I wanted the constraint — if the whole bot fits comfortably on 4 ARM cores and 8 GB of RAM, it's going to be lean by construction. Second, everything stays on my own network: no cloud bill creep, no vendor lock-in, no surprise egress fees when the WebSocket feeds get chatty. Third, I can <em>see</em> it. The green light blinking on my desk is a better monitoring tool than any dashboard, because the moment it stops blinking I notice.</p>
+
+            <p>The trade-off is that a Pi is not a production environment. It reboots when the power flickers. SD cards wear out. The network can drop. Any bot that ran well on a Pi had to be written assuming everything is unreliable — which, as it turns out, is exactly how you should write trading code anyway.</p>
+
+            <h2>The architecture that fell out of that constraint</h2>
+
+            <p>The bot runs three detection tiers in parallel, each optimized for a different speed-vs-depth trade-off:</p>
+
+            <ul>
+                <li><strong>The Sniper</strong> (45 seconds): polls for new markets, instantly trades obvious mispricings. No AI call, no LLM cost.</li>
+                <li><strong>The RSS Fast Lane</strong> (2 minutes): 24 news feeds trigger whale-signal analysis when a headline moves.</li>
+                <li><strong>The Full Pipeline</strong> (5 minutes): three-agent AI sequence — Alpha Scout filters 400+ markets down to 40, Beta Analyst fetches news and whale activity in parallel, Gamma Judge (DeepSeek) estimates true probability and decides BUY_YES / BUY_NO / SKIP.</li>
+            </ul>
+
+            <p>The insight was that the <em>obvious</em> mispricings don't need AI. "Will Tunisia win the 2026 World Cup?" trading at 50/50 is a button press, not a research project. The Sniper catches those with pattern matching — no tokens spent — and the edge usually corrects in minutes. That leaves the AI pipeline to do the harder work on markets that actually require reasoning.</p>
+
+            <p>Three tiers, three very different cost profiles. The Sniper costs $0 per scan. The AI pipeline costs fractions of a cent. That's how the whole bot runs on ~$21/month in API fees while still evaluating hundreds of markets a day.</p>
+
+            <h2>Everything is async, and that matters on a Pi</h2>
+
+            <p>The bot is Python 3.11, fully <code>asyncio</code>. There's one event loop and a collection of background tasks — a market scanner, a position monitor, a Telegram listener, a WebSocket order-book feed, a news poller, a whale tracker. None of them block each other.</p>
+
+            <p>On a Pi this is not optional. If the market scanner blocks the event loop while it waits on a slow API response, the position monitor can't check for trailing-stop exits, the WebSocket drops behind, and the Telegram bot stops responding to my commands. A single synchronous <code>requests.get()</code> call in the wrong place would cascade into "my bot froze" every few hours. Async means one slow response just yields control — everything else keeps moving.</p>
+
+            <p>Some practical patterns that made a real difference:</p>
+
+            <ul>
+                <li><strong>Deduplication locks around order placement.</strong> If a scan fires twice while the previous order is still confirming, I don't want two positions. An <code>asyncio.Lock</code> per market prevents it.</li>
+                <li><strong>FOK (fill-or-kill) semantics on entries.</strong> The bot won't hold a partial fill. Either it gets the full position or it walks away — no half-legged trades sitting around.</li>
+                <li><strong>Persistent state everywhere.</strong> If the Pi reboots mid-scan, the bot has to come back up knowing exactly what positions it holds, what orders are in flight, and what markets it's in a re-entry cooldown on. Everything material goes to disk synchronously.</li>
+            </ul>
+
+            <h2>Risk management in code, not in vibes</h2>
+
+            <p>A bot that runs 24/7 without supervision will absolutely find a way to lose money if you don't write the guardrails into the code. Polybot's are all config-tunable and enforced at the position-manager level:</p>
+
+            <ul>
+                <li>Max 15% of capital per trade, half-Kelly sized and scaled by AI confidence</li>
+                <li>35% stop-loss, 50% take-profit, trailing stop activates at +15% and trails 10% from peak</li>
+                <li>10% daily loss limit — bot halts for the day if hit</li>
+                <li>Drawdown protection: once account is down 10%, sizing drops to quarter-Kelly</li>
+                <li>2%/day confidence decay on open positions — forces re-evaluation of stale theses</li>
+                <li>24-hour re-entry cooldown per market so I can't keep buying the same mispricing</li>
+            </ul>
+
+            <p>All of these are parameters I can tune over Telegram at runtime with <code>/set &lt;param&gt; &lt;value&gt;</code>. Which brings me to the operational side.</p>
+
+            <h2>Remote monitoring with Telegram</h2>
+
+            <p>The Pi doesn't have a screen. I manage the bot entirely through a Telegram chat with it. There are about 20 commands, but the ones I actually use every day are small:</p>
+
+            <ul>
+                <li><code>/status</code> — portfolio summary: capital, open positions, P&L, last scan time</li>
+                <li><code>/positions</code> — every open position with entry price, current price, unrealized P&L</li>
+                <li><code>/pnl</code> — realized P&L broken out by exit reason (take-profit, stop, trailing, thesis-change)</li>
+                <li><code>/pause</code> and <code>/resume</code> — stop new entries without touching existing positions</li>
+                <li><code>/closeall</code> — panic button</li>
+            </ul>
+
+            <p>Telegram is overkill for this. But it's also perfect. It's already on my phone. It has push notifications. Every command produces a message I can scroll back through later. The bot posts proactively when it enters or exits a position, so I find out about trades before I check the dashboard. A $0 monitoring stack that works from anywhere in the world.</p>
+
+            <h2>Deploying to the Pi</h2>
+
+            <p>Deploying is one command:</p>
+
+            <p><code>bash deploy.sh</code> — <code>rsync</code>'s the code over SSH, runs a Python syntax check, restarts the systemd service, and does a health check. If the health check fails it rolls back to the previous version. A <code>watchdog.sh</code> script supervises the service and auto-restarts on crash. systemd does the rest.</p>
+
+            <p>Between rsync deploys, systemd auto-restart, and persistent state, the bot has survived a handful of crashes, two router reboots, and one power outage without my intervention. That's the bar I was aiming for: if I go on vacation, I don't need to think about it.</p>
+
+            <h2>What I'd tell you if you wanted to try this</h2>
+
+            <p>Three things I'd hand to someone starting from scratch:</p>
+
+            <p><strong>Write it async from day one.</strong> Retrofitting async into a bot that started synchronous is brutal. If you know the bot is going to do more than one thing concurrently — and it will — start with <code>asyncio</code> and never look back.</p>
+
+            <p><strong>Paper-trade before you fund.</strong> Polybot has been in paper mode since February. That isn't because I'm cautious for its own sake. It's because I want 50+ simulated trades with realistic slippage (300 bps entry / 400 bps exit plus volume-scaled impact) before I'm willing to claim the edge is real. Paper mode also reveals the boring bugs — off-by-one position-sizing errors, stale-price exits that fire on the wrong side — before they cost money.</p>
+
+            <p><strong>Write the risk logic first, the signal logic second.</strong> I built the position manager, the stop-loss machinery, and the daily loss limits before I wrote a single line of market-scanning code. If the bot tells me it has an edge but the risk code is half-baked, I'm not going to fund it. Putting the guardrails in first makes the signal work feel less like gambling and more like engineering.</p>
+
+            <h2>What's next</h2>
+
+            <p>The bot has been paper-trading for two months and the edge on meme-market mispricings has held up across ~200 simulated trades. The next step is live deployment with a small amount of real capital — $300 starting, matching the paper-mode configuration — and seeing whether the simulated slippage model was honest. If it holds for 50+ live trades, I'll scale up. If it doesn't, I go back to the drawing board and figure out which assumption broke.</p>
+
+            <p>The architecture I've described here also generalizes. Four of my other trading bots — fdabot (FDA drug approvals), govbot (federal contracts + SEC filings), insiderbot (SEC Form 4 cluster buys), and usdabot (USDA commodity releases) — share the same poll-filter-analyze-trade skeleton. Swap the data feeds, swap the AI prompts, keep the risk engine. That's the real value of getting the architecture right once: the next bot costs a fraction of what the first one did.</p>
+
+            <div class="blog-post-tags">
+                <span>Python</span>
+                <span>AsyncIO</span>
+                <span>Raspberry Pi</span>
+                <span>DeepSeek</span>
+                <span>WebSockets</span>
+                <span>Telegram Bot</span>
+                <span>systemd</span>
+                <span>Prediction Markets</span>
+            </div>
+        </div>
+    </article>
+</body>
+</html>
