@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Building a FERPA-Compliant SARB Tracker From Scratch - Robert Monterroso</title>
-    <meta name="description" content="Building in public: a K-12 attendance referral system that reads Aeries SIS, tracks intervention evidence, and generates LACOE packets. Here's what works, what's stubbed, and what's next.">
+    <meta name="description" content="Building in public: a K-12 attendance referral system with dual-engine database isolation, immutable audit logging, and California Ed Code classification. Here's the code, the hard calls, and what's left.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -16,7 +16,6 @@
         .blog-post-back:hover { text-decoration: underline; }
         .blog-post-date { font-size: 0.85rem; color: var(--on-surface-muted); margin-bottom: 0.75rem; }
         .blog-post-title { font-size: 2.2rem; font-weight: 700; line-height: 1.2; letter-spacing: -0.02em; color: var(--on-surface); margin-bottom: 1.5rem; }
-        .blog-post-hero { width: 100%; border-radius: var(--radius-sm); margin-bottom: 2rem; box-shadow: var(--elevation-2); }
         .blog-post-body { font-size: 1.05rem; line-height: 1.75; color: var(--on-surface); }
         .blog-post-body h2 { font-size: 1.4rem; font-weight: 600; margin: 2.5rem 0 1rem; letter-spacing: -0.01em; }
         .blog-post-body p { margin-bottom: 1.25rem; }
@@ -41,6 +40,30 @@
             margin: 1.5rem 0;
             font-size: 0.95rem;
         }
+        .blog-post-body .stats-strip {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            background: var(--primary-soft);
+            padding: 1.25rem 1.5rem;
+            border-radius: var(--radius-sm);
+            margin: 1.5rem 0;
+        }
+        .blog-post-body .stats-strip .stat {
+            text-align: center;
+        }
+        .blog-post-body .stats-strip .stat-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: block;
+        }
+        .blog-post-body .stats-strip .stat-label {
+            font-size: 0.8rem;
+            color: var(--on-surface-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
         .blog-post-body code {
             background: rgba(0,0,0,0.06);
             padding: 0.15em 0.4em;
@@ -48,6 +71,28 @@
             font-size: 0.9em;
             font-family: 'SF Mono', 'Fira Code', monospace;
         }
+        .blog-post-body pre {
+            background: #1e1e2e;
+            color: #cdd6f4;
+            padding: 1.25rem 1.5rem;
+            border-radius: var(--radius-sm);
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+        }
+        .blog-post-body pre code {
+            background: none;
+            padding: 0;
+            font-size: inherit;
+            color: inherit;
+        }
+        .blog-post-body pre .comment { color: #6c7086; }
+        .blog-post-body pre .keyword { color: #cba6f7; }
+        .blog-post-body pre .string { color: #a6e3a1; }
+        .blog-post-body pre .function { color: #89b4fa; }
+        .blog-post-body pre .number { color: #fab387; }
         .blog-post-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--outline); }
         .blog-post-tags span {
             font-size: 0.8rem;
@@ -60,6 +105,7 @@
         @media (max-width: 640px) {
             .blog-post-title { font-size: 1.6rem; }
             .blog-post-body { font-size: 1rem; }
+            .blog-post-body .stats-strip { gap: 1rem; }
         }
     </style>
 </head>
@@ -74,85 +120,129 @@
         <h1 class="blog-post-title">Building a FERPA-Compliant SARB Tracker From Scratch</h1>
 
         <div class="blog-post-body">
-            <p>I'm building a tool to solve a problem I watch happen every year at my district: when it's time to refer chronically absent students to the Student Attendance Review Board (SARB), admins scramble to assemble evidence from three different systems, filing cabinets, and institutional memory. California Ed Code requires a documented chain of interventions before referral -- truancy letters, parent contacts, SART meetings -- and right now that trail lives in scattered spreadsheets and people's heads.</p>
-
-            <p>This is a build-in-public post. The architecture is done, the tests pass, but this project has never touched real student data yet. Here's what's working, what's stubbed, and what's next.</p>
-
-            <h2>The Architecture</h2>
-
-            <p>The core design decision was treating this as two isolated databases from day one:</p>
-
-            <ul>
-                <li><strong>Aeries (read-only):</strong> The district's student information system. SARB Tracker reads attendance counts and student profiles but never writes back. This is enforced at the engine level -- separate SQLAlchemy connections with different access patterns.</li>
-                <li><strong>Sidecar (read/write):</strong> Where intervention evidence lives. Letters sent, contact attempts, SART meetings, and an immutable audit log.</li>
-            </ul>
-
-            <p>This separation isn't just good engineering -- it's a FERPA boundary. The fewer systems that write student data, the smaller the compliance surface. The app can be blown away and rebuilt without affecting the district's source of truth.</p>
-
-            <h2>What Actually Works Today</h2>
-
-            <ul>
-                <li><strong>Attendance classification:</strong> Five tiers (clean through chronic truant) with California Ed Code priority ordering. Unexcused-based tiers rank higher than total-absence tiers because they trigger legal notification requirements. Fully tested.</li>
-                <li><strong>PDF packet generation:</strong> 7-page LACOE-format SARB referral packets rendered with Jinja2 + WeasyPrint. Cover sheet, attendance records, truancy letters, contact log, SART notes, interventions summary, signature page. Tested with page-count assertions.</li>
-                <li><strong>Case tracking:</strong> Admin staff can record truancy letters (with delivery proof references), parent/guardian contact attempts, and SART meeting notes. Full input validation. Each write audited.</li>
-                <li><strong>Audit logging:</strong> Every single read of student data writes an immutable row -- who accessed what, when, from which request, whether it was disclosed to a third party. This is the contract that makes FERPA compliance provable.</li>
-                <li><strong>Weekly reporter:</strong> Reads a restricted Google Sheet (intervention evidence) plus Aeries attendance, generates a CSV action report showing which students are ready for referral and which still need evidence. Outputs to local file, Google Drive, or stdout for dry-run.</li>
-                <li><strong>Auth:</strong> Google OIDC JWT validation via JWKS in production, with a dev-mode fallback for local testing.</li>
-                <li><strong>Docker deployment:</strong> Full dual-database scaffold (MSSQL for Aeries mock + SQLite sidecar), one-shot reporter container, systemd/cron scheduling docs.</li>
-            </ul>
-
-            <p>39 tests passing. <code>mypy --strict</code> with zero suppressions. Clean linting.</p>
-
-            <h2>What's Stubbed</h2>
-
-            <p>Being honest about what hasn't been validated against real systems:</p>
-
-            <div class="callout-warning">
-                <strong>Attendance data is hardcoded in stub mode.</strong> Every student lookup currently returns the same fake numbers (90 present, 5 excused, 5 unexcused). The Aeries API adapter is written and unit-tested with mocked HTTP responses, but it has never hit a real Aeries instance. This is the biggest gap.
+            <div class="stats-strip">
+                <div class="stat"><span class="stat-number">39</span><span class="stat-label">Tests Passing</span></div>
+                <div class="stat"><span class="stat-number">0</span><span class="stat-label">mypy Suppressions</span></div>
+                <div class="stat"><span class="stat-number">2</span><span class="stat-label">Isolated DB Engines</span></div>
+                <div class="stat"><span class="stat-number">100%</span><span class="stat-label">Reads Audited</span></div>
             </div>
 
-            <ul>
-                <li><strong>Aeries API connection:</strong> The adapter supports retry/backoff, caching, and school-year filtering -- all tested with mocks. But I don't have API credentials from district IT yet. Until those arrive, classification results are meaningless.</li>
-                <li><strong>Google Sheets/Drive integration:</strong> Code is complete with header validation against the template. Never run against a real Sheet or uploaded to real Drive. Needs a service account and shared files.</li>
-                <li><strong>MSSQL:</strong> All tests use SQLite in-memory. The MSSQL dialect path exists but hasn't been validated on a live SQL Server instance.</li>
-                <li><strong>No edit/delete:</strong> Admins can create evidence entries but can't correct mistakes yet. This is a known limitation for MVP.</li>
-            </ul>
+            <p>Every year around March, the SARB coordinator at my district starts asking office staff for "the packet." That means: attendance printouts from Aeries, copies of truancy letters that may or may not have been scanned, handwritten contact logs from a binder, and SART meeting notes that live in someone's email. California Education Code &sect;48260-48273 requires schools to document a specific intervention chain before referring chronically absent students to the Student Attendance Review Board. The documentation requirement is clear. The tooling is nonexistent.</p>
 
-            <h2>FERPA-First Design Decisions</h2>
+            <p>I'm building the tool. This post is about where it is right now -- what's real, what almost went wrong, and what's still waiting on credentials I don't have yet.</p>
 
-            <p>Working with K-12 student data means every design choice has a compliance dimension:</p>
+            <h2>The Hard Call: Dual-Engine Isolation</h2>
 
-            <ul>
-                <li><strong>Pydantic allowlists:</strong> All API models use <code>extra="forbid"</code>. If a field isn't explicitly in the schema, it can't leak. No accidental PII exposure from overly broad serialization.</li>
-                <li><strong>Report-only pilot:</strong> The initial deployment doesn't even run as a web app for staff. A scheduled job reads a restricted Google Sheet and Aeries, drops a CSV into a restricted Drive folder. Minimal access surface.</li>
-                <li><strong>Evidence keying:</strong> The Google Sheet uses <code>school_code + student_id</code> only. No student names in the Sheet. No fuzzy matching. Names only appear in the final restricted report output.</li>
-                <li><strong>Audit contract:</strong> Every function that reads student data must call <code>write_audit()</code>. This isn't a convention -- it's enforced in code review and tested. The audit log records action type, resource path, processing mode, and third-party disclosure target.</li>
-            </ul>
+            <p>The first architectural decision was the most important one. Aeries (our student information system) is the source of truth for student identity and attendance. My app needs to read from it. But FERPA means I cannot write back to it, and I cannot let a bug in my sidecar logic accidentally execute against the district's production database.</p>
 
-            <h2>The Stack</h2>
+            <p>The solution is two completely separate SQLAlchemy engines built from independent connection strings:</p>
 
-            <ul>
-                <li><strong>Backend:</strong> Python 3.11, FastAPI, SQLAlchemy (dual engines)</li>
-                <li><strong>PDF:</strong> Jinja2 + WeasyPrint</li>
-                <li><strong>Auth:</strong> Google OIDC JWT with JWKS verification</li>
-                <li><strong>Google APIs:</strong> Sheets (read) + Drive (write) via service account</li>
-                <li><strong>Observability:</strong> Prometheus metrics + structured JSON logging with request_id threading</li>
-                <li><strong>Deployment:</strong> Docker, systemd timer, cron -- three documented scheduling paths</li>
-                <li><strong>Quality:</strong> <code>mypy --strict</code>, <code>ruff</code>, 39 tests, idempotent migrations for SQLite + MSSQL</li>
-            </ul>
+<pre><code><span class="keyword">from</span> sqlalchemy <span class="keyword">import</span> Engine, create_engine
+<span class="keyword">from</span> sqlalchemy.orm <span class="keyword">import</span> sessionmaker
+<span class="keyword">from</span> sqlalchemy.pool <span class="keyword">import</span> StaticPool
+
+AERIES_DB_URL = os.getenv(<span class="string">"AERIES_DB_URL"</span>, <span class="string">"sqlite:///:memory:"</span>)
+SIDECAR_DB_URL = os.getenv(<span class="string">"SIDECAR_DB_URL"</span>, <span class="string">"sqlite:///:memory:"</span>)
+
+<span class="keyword">def</span> <span class="function">_build_engine</span>(url: str) -> Engine:
+    <span class="keyword">if</span> <span class="string">"sqlite"</span> <span class="keyword">in</span> url:
+        <span class="keyword">return</span> create_engine(url, connect_args={<span class="string">"check_same_thread"</span>: <span class="keyword">False</span>}, poolclass=StaticPool)
+    <span class="keyword">return</span> create_engine(url)
+
+aeries_engine = _build_engine(AERIES_DB_URL)   <span class="comment"># Read-only. Never INSERT/UPDATE/DELETE.</span>
+sidecar_engine = _build_engine(SIDECAR_DB_URL) <span class="comment"># Read/write. Interventions + audit log.</span>
+
+AeriesSessionLocal = sessionmaker(bind=aeries_engine)
+SidecarSessionLocal = sessionmaker(bind=sidecar_engine)</code></pre>
+
+            <p>This looks simple but it caught a real bug early. The original code checked <code>if "sqlite" in url</code> against the <em>Aeries</em> URL to decide connection args for <em>both</em> engines. In the docker-compose setup, Aeries is MSSQL and the sidecar is SQLite. The sidecar engine was getting MSSQL connection settings. Tests passed because both were SQLite in-memory during testing. It would have failed silently in production -- the sidecar would connect but with wrong pool behavior.</p>
+
+            <p>The fix was obvious once caught: each engine checks its own URL independently. But it's the kind of bug that only manifests when your test environment doesn't match your deployment topology -- which is always.</p>
+
+            <h2>The FERPA Boundary as Code</h2>
+
+            <p>FERPA compliance isn't a checkbox you add at the end. It's a constraint that shapes every model. The approach: Pydantic models with <code>extra="forbid"</code> act as an allowlist. If a field isn't explicitly in the schema, it can't serialize out of the API.</p>
+
+<pre><code><span class="keyword">from</span> pydantic <span class="keyword">import</span> BaseModel, ConfigDict
+
+<span class="keyword">class</span> <span class="function">FerpaModel</span>(BaseModel):
+    <span class="string">"""Base model enforcing strict schema boundaries to prevent PII leakage."""</span>
+    model_config = ConfigDict(extra=<span class="string">"forbid"</span>)
+
+<span class="keyword">class</span> <span class="function">StudentInfo</span>(FerpaModel):
+    student_id: int
+    school_code: int
+    first_name: str
+    last_name: str
+    grade: int
+    <span class="comment"># That's it. No SSN, no address, no parent info, no IEP flags.</span>
+    <span class="comment"># Adding a field requires explicit justification in code review.</span></code></pre>
+
+            <p>And the audit contract -- every read of student data must call <code>write_audit()</code> before returning:</p>
+
+<pre><code><span class="keyword">def</span> <span class="function">write_audit</span>(
+    actor: str,
+    action: str,            <span class="comment"># "read", "create", "export", "report"</span>
+    resource: str,          <span class="comment"># "attendance/994/1001"</span>
+    processing_mode: str,   <span class="comment"># "local"</span>
+    third_party_disclosure: str  <span class="comment"># "None" or "LACOE SARB"</span>
+) -> <span class="keyword">None</span>:
+    <span class="keyword">with</span> SidecarSessionLocal() <span class="keyword">as</span> db:
+        db.execute(text(
+            <span class="string">"INSERT INTO audit_log "</span>
+            <span class="string">"(request_id, actor, action, resource, processing_mode, third_party_disclosure) "</span>
+            <span class="string">"VALUES (:request_id, :actor, :action, :resource, :mode, :disclosure)"</span>
+        ), {...})
+        db.commit()</code></pre>
+
+            <p>This is enforced by convention and testing -- every test that reads student data asserts an audit row was written. There's no way to skip it without a test failing. If I ever add a new route that reads from Aeries, the test pattern catches the missing audit call.</p>
+
+            <h2>Classification Priority: Where I Almost Got It Wrong</h2>
+
+            <p>The attendance classification engine maps student absence data to five tiers. The first version had a bug that wouldn't have shown up until a real SARB hearing:</p>
+
+<pre><code><span class="keyword">def</span> <span class="function">classify_attendance</span>(student_id, present_count, excused_count, unexcused_count, tardy_count) -> str:
+    total_days = present_count + excused_count + unexcused_count
+    <span class="keyword">if</span> total_days == <span class="number">0</span>:
+        <span class="keyword">return</span> <span class="string">"clean"</span>
+
+    absence_pct = ((excused_count + unexcused_count) / total_days) * <span class="number">100</span>
+    unexcused_pct = (unexcused_count / total_days) * <span class="number">100</span>
+
+    <span class="comment"># Unexcused tiers MUST come first -- they trigger legal actions</span>
+    <span class="keyword">if</span> unexcused_pct >= <span class="number">10.0</span>:
+        <span class="keyword">return</span> <span class="string">"chronic_truant"</span>       <span class="comment"># EC &sect;48263.6 -- immediate SARB referral</span>
+    <span class="keyword">if</span> unexcused_count >= <span class="number">3</span>:
+        <span class="keyword">return</span> <span class="string">"truant"</span>              <span class="comment"># EC &sect;48260 -- legal notification trigger</span>
+    <span class="keyword">if</span> absence_pct >= <span class="number">10.0</span>:
+        <span class="keyword">return</span> <span class="string">"chronic_absentee"</span>    <span class="comment"># EC &sect;60901(c)(1) -- intervention required</span>
+    <span class="keyword">if</span> absence_pct >= <span class="number">5.0</span>:
+        <span class="keyword">return</span> <span class="string">"at_risk"</span>
+    <span class="keyword">return</span> <span class="string">"clean"</span></code></pre>
+
+            <p>The original code checked <code>chronic_absentee</code> (10% total absences) before <code>truant</code> (3+ unexcused). A student with 14% total absences AND 4 unexcused days would have been classified as <code>chronic_absentee</code> -- which triggers intervention but not the legal notification required under EC &sect;48260. Wrong classification, wrong workflow, potential compliance failure at a SARB hearing.</p>
+
+            <p>The fix was reordering the checks: unexcused-based tiers always evaluate first because they carry legal weight. I added a regression test specifically for the overlap case. This is the kind of bug that passes code review but fails at the courthouse.</p>
+
+            <h2>What's Honestly Not Done</h2>
+
+            <div class="callout-warning">
+                <strong>This project has never processed a real student's data.</strong> The Aeries API adapter is written and unit-tested with mocked HTTP, but attendance reads currently return hardcoded stub values. Google Sheets/Drive integration is code-complete but has never hit real Google APIs. The MSSQL path is untested on live SQL Server. I'm blocked on credentials from district IT and a Google service account setup.
+            </div>
+
+            <p>That's the honest state. The architecture is production-grade. The test coverage is real. The compliance patterns are correct. But until real attendance data flows through the classification engine and a real admin reviews the output, it's an untested prototype with good bones.</p>
 
             <h2>What's Next</h2>
 
-            <p>The code is waiting on external dependencies, not more engineering:</p>
+            <p>Three things, in order:</p>
 
             <ul>
-                <li>Get Aeries API credentials from district IT and validate attendance reads against real students</li>
-                <li>Set up Google service account, import the evidence template into a restricted Sheet, run the reporter against real data</li>
-                <li>Pilot with the small SARB admin team (3-4 people) before broadening access</li>
-                <li>Add edit/delete flows for evidence entries</li>
+                <li>Set up the Google service account and run the reporter against a real Sheet with real evidence entries</li>
+                <li>Get Aeries API credentials and validate classification against known students</li>
+                <li>Pilot with 3-4 SARB admin staff at one school site</li>
             </ul>
 
-            <p>After validation, the product direction is multi-district licensing. Over 1,000 California districts use Aeries, and SARB compliance is a universal pain point. The architecture already isolates by school code and supports configurable API endpoints -- but that's future-state thinking. Right now the goal is: prove it works for one school, with one admin team, against real attendance data.</p>
+            <p>After validation, the pitch is straightforward: over 1,000 California districts use Aeries SIS, and every one of them has the same SARB compliance problem. The architecture already isolates by school code, supports configurable API endpoints, and separates the evidence sidecar from the district's source of truth. But that's a post for after the pilot proves the workflow actually holds up with real humans and real data.</p>
 
             <div class="blog-post-tags">
                 <span>Python</span>
@@ -160,7 +250,7 @@
                 <span>FERPA</span>
                 <span>K-12 EdTech</span>
                 <span>Aeries SIS</span>
-                <span>Google APIs</span>
+                <span>SQLAlchemy</span>
                 <span>Docker</span>
                 <span>Building in Public</span>
             </div>
