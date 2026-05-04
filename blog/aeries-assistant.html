@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I Built a Chat Interface for a 1990s Student Database - Robert Monterroso</title>
+    <meta name="description" content="Office staff shouldn't need to learn a clunky SIS UI to look up a student. I built a natural language layer over Aeries that routes 80% of queries locally in 3ms.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        .blog-post { max-width: 720px; margin: 0 auto; padding: 3rem 1.5rem 6rem; }
+        .blog-post-back { display: inline-flex; align-items: center; gap: 0.25rem; color: var(--primary); font-size: 0.9rem; font-weight: 500; text-decoration: none; margin-bottom: 2.5rem; }
+        .blog-post-back:hover { text-decoration: underline; }
+        .blog-post-date { font-size: 0.85rem; color: var(--on-surface-muted); margin-bottom: 0.75rem; }
+        .blog-post-title { font-size: 2.2rem; font-weight: 700; line-height: 1.2; letter-spacing: -0.02em; color: var(--on-surface); margin-bottom: 1.5rem; }
+        .blog-post-body { font-size: 1.05rem; line-height: 1.75; color: var(--on-surface); }
+        .blog-post-body h2 { font-size: 1.4rem; font-weight: 600; margin: 2.5rem 0 1rem; letter-spacing: -0.01em; }
+        .blog-post-body p { margin-bottom: 1.25rem; }
+        .blog-post-body ul { margin: 0 0 1.25rem 1.5rem; }
+        .blog-post-body li { margin-bottom: 0.5rem; }
+        .blog-post-body a { color: var(--primary); text-decoration: none; }
+        .blog-post-body a:hover { text-decoration: underline; }
+        .blog-post-body strong { font-weight: 600; }
+        .blog-post-body .callout {
+            background: var(--primary-soft);
+            border-left: 3px solid var(--primary);
+            padding: 1rem 1.25rem;
+            border-radius: 0 var(--radius-xs) var(--radius-xs) 0;
+            margin: 1.5rem 0;
+            font-size: 0.95rem;
+        }
+        .blog-post-body .callout-warning {
+            background: #fff8e1;
+            border-left: 3px solid #f9a825;
+            padding: 1rem 1.25rem;
+            border-radius: 0 var(--radius-xs) var(--radius-xs) 0;
+            margin: 1.5rem 0;
+            font-size: 0.95rem;
+        }
+        .blog-post-body .stats-strip {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            background: var(--primary-soft);
+            padding: 1.25rem 1.5rem;
+            border-radius: var(--radius-sm);
+            margin: 1.5rem 0;
+        }
+        .blog-post-body .stats-strip .stat { text-align: center; }
+        .blog-post-body .stats-strip .stat-number { font-size: 1.5rem; font-weight: 700; color: var(--primary); display: block; }
+        .blog-post-body .stats-strip .stat-label { font-size: 0.8rem; color: var(--on-surface-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+        .blog-post-body code {
+            background: rgba(0,0,0,0.06);
+            padding: 0.15em 0.4em;
+            border-radius: 4px;
+            font-size: 0.9em;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+        }
+        .blog-post-body pre {
+            background: #1e1e2e;
+            color: #cdd6f4;
+            padding: 1.25rem 1.5rem;
+            border-radius: var(--radius-sm);
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+        }
+        .blog-post-body pre code { background: none; padding: 0; font-size: inherit; color: inherit; }
+        .blog-post-body pre .comment { color: #6c7086; }
+        .blog-post-body pre .keyword { color: #cba6f7; }
+        .blog-post-body pre .string { color: #a6e3a1; }
+        .blog-post-body pre .function { color: #89b4fa; }
+        .blog-post-body pre .number { color: #fab387; }
+        .blog-post-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--outline); }
+        .blog-post-tags span {
+            font-size: 0.8rem;
+            padding: 0.3rem 0.75rem;
+            background: var(--primary-container);
+            color: var(--on-primary-container);
+            border-radius: 999px;
+            font-weight: 500;
+        }
+        @media (max-width: 640px) {
+            .blog-post-title { font-size: 1.6rem; }
+            .blog-post-body { font-size: 1rem; }
+            .blog-post-body .stats-strip { gap: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <article class="blog-post">
+        <a href="../index.html#blog" class="blog-post-back">
+            <span class="material-symbols-outlined" aria-hidden="true">arrow_back</span>
+            Back to portfolio
+        </a>
+
+        <p class="blog-post-date">March 2026</p>
+        <h1 class="blog-post-title">I Built a Chat Interface for a 1990s Student Database</h1>
+
+        <div class="blog-post-body">
+            <div class="stats-strip">
+                <div class="stat"><span class="stat-number">10</span><span class="stat-label">Tools</span></div>
+                <div class="stat"><span class="stat-number">3ms</span><span class="stat-label">Local Query</span></div>
+                <div class="stat"><span class="stat-number">80%</span><span class="stat-label">Queries Routed Locally</span></div>
+                <div class="stat"><span class="stat-number">30</span><span class="stat-label">Tests</span></div>
+            </div>
+
+            <p>Aeries SIS is a student information system used by over 1,000 school districts in California. It holds everything -- attendance, grades, contacts, enrollment history. It's also the kind of software where looking up a student's phone number requires navigating through four dropdown menus and a popup window that blocks the rest of the screen.</p>
+
+            <p>Our office staff look up students dozens of times a day. A parent calls about absences. A teacher needs a contact number. An admin needs to verify enrollment. Every time, it's the same painful UI dance. I built a chat interface where they can just type "look up Maria Garcia" and get the answer.</p>
+
+            <h2>Two-Tier Routing: The Interesting Problem</h2>
+
+            <p>The obvious approach is: send every query to Claude, let it figure out what API calls to make, return the answer. That works, but it's slow (9+ seconds per query) and it means every student lookup gets sent to a third-party AI service. Under FERPA, that's a third-party disclosure you have to document.</p>
+
+            <p>Most queries from office staff are simple: "look up student 12345", "attendance for Maria Garcia", "contacts for school 994." These don't need AI reasoning. They need a regex match and an API call.</p>
+
+            <p>So I built a two-tier router:</p>
+
+<pre><code><span class="keyword">def</span> <span class="function">route_query</span>(query: str) -> RouteResult | <span class="keyword">None</span>:
+    <span class="string">"""Try to handle locally without sending to Claude."""</span>
+    normalized = query.strip().lower()
+
+    <span class="comment"># Direct student ID lookup: "look up 12345", "student 12345"</span>
+    id_match = re.search(r<span class="string">"\b(\d{4,7})\b"</span>, normalized)
+    <span class="keyword">if</span> id_match <span class="keyword">and</span> <span class="keyword">any</span>(kw <span class="keyword">in</span> normalized <span class="keyword">for</span> kw <span class="keyword">in</span> [<span class="string">"look"</span>, <span class="string">"student"</span>, <span class="string">"find"</span>]):
+        <span class="keyword">return</span> RouteResult(tool=<span class="string">"get_student"</span>, params={<span class="string">"student_id"</span>: int(id_match.group(<span class="number">1</span>))})
+
+    <span class="comment"># Name search: "look up Maria Garcia"</span>
+    name_match = re.search(r<span class="string">"(?:look up|find|search)\s+([A-Za-z]+(?:\s+[A-Za-z]+)?)"</span>, query)
+    <span class="keyword">if</span> name_match:
+        <span class="keyword">return</span> RouteResult(tool=<span class="string">"search_students"</span>, params={<span class="string">"name"</span>: name_match.group(<span class="number">1</span>)})
+
+    <span class="comment"># Bail to Claude for complex queries ("who has the most absences?")</span>
+    <span class="keyword">if</span> <span class="keyword">any</span>(kw <span class="keyword">in</span> normalized <span class="keyword">for</span> kw <span class="keyword">in</span> [<span class="string">"who has"</span>, <span class="string">"compare"</span>, <span class="string">"failing"</span>, <span class="string">"most"</span>]):
+        <span class="keyword">return</span> <span class="keyword">None</span>  <span class="comment"># AI path</span>
+
+    <span class="comment"># ... 8 patterns total covering all 10 tools</span></code></pre>
+
+            <p>When the router matches, the query never leaves the server. No API call to Anthropic, no token cost, no FERPA disclosure. The audit log marks it <code>processing_mode: "local"</code> instead of <code>"ai-assisted"</code>.</p>
+
+            <p>The benchmark results surprised me:</p>
+
+            <div class="callout">
+                <strong>Local path:</strong> 3ms average response time. Zero tokens. Zero third-party disclosure.<br>
+                <strong>AI path:</strong> 9.3 seconds average. ~1,500 tokens per query. Logged as external processing.<br>
+                <strong>Ratio:</strong> Local is ~2,741x faster. In practice, ~80% of office queries match the regex patterns.
+            </div>
+
+            <p>The AI path still exists for complex questions ("which 3rd graders have more than 5 unexcused absences this month?") where Claude needs to reason about which API calls to chain together. But the common case -- the parent calling about their kid -- resolves instantly without touching an external service.</p>
+
+            <h2>The PII Stripping Layer</h2>
+
+            <p>Aeries API responses include everything. Social security numbers, medical flags, parent employment info, IEP status. None of that should surface in a chat interface for general office staff.</p>
+
+<pre><code>SAFE_STUDENT_FIELDS = [
+    <span class="string">"StudentID"</span>, <span class="string">"FirstName"</span>, <span class="string">"LastName"</span>, <span class="string">"Grade"</span>,
+    <span class="string">"SchoolCode"</span>, <span class="string">"Gender"</span>, <span class="string">"Birthdate"</span>,
+    <span class="string">"HomePhone"</span>, <span class="string">"CellPhone"</span>,  <span class="comment"># Contact info only</span>
+]
+
+SAFE_CONTACT_FIELDS = [
+    <span class="string">"ContactName"</span>, <span class="string">"Relationship"</span>,
+    <span class="string">"HomePhone"</span>, <span class="string">"WorkPhone"</span>, <span class="string">"CellPhone"</span>,
+]
+
+<span class="keyword">def</span> <span class="function">filter_student</span>(raw: dict) -> dict:
+    <span class="string">"""Strip everything except allowlisted fields. Fail closed."""</span>
+    <span class="keyword">return</span> {k: v <span class="keyword">for</span> k, v <span class="keyword">in</span> raw.items() <span class="keyword">if</span> k <span class="keyword">in</span> SAFE_STUDENT_FIELDS}</code></pre>
+
+            <p>This is a fail-closed approach. If Aeries adds a new field to their API response tomorrow (they've done it before -- no changelog, no warning), it gets silently dropped. The only way data surfaces in the chat is if it's explicitly in the allowlist.</p>
+
+            <h2>The Audit Log That Can't Be Deleted</h2>
+
+            <p>Every query -- local or AI-routed -- writes a row to a SQLite audit database:</p>
+
+<pre><code>CREATE TABLE audit_log (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    timestamp TEXT NOT NULL,
+    session_id TEXT NOT NULL,
+    query TEXT NOT NULL,
+    processing_mode TEXT NOT NULL,  <span class="comment">-- "local" or "ai-assisted"</span>
+    tools_called TEXT,
+    third_party_disclosure TEXT NOT NULL,  <span class="comment">-- "none" or "anthropic"</span>
+    student_ids_accessed TEXT
+);</code></pre>
+
+            <p>The app only inserts. No UPDATE, no DELETE statements exist in the codebase. If a parent or auditor asks "who accessed my child's record and when," the answer is in the database. If they ask "was my child's data sent to an AI service," the <code>third_party_disclosure</code> column tells you exactly which queries hit Claude and which stayed local.</p>
+
+            <h2>What It Looks Like</h2>
+
+            <p>The frontend is vanilla HTML/CSS/JS. No React, no build step, no node_modules. A chat interface with typing indicators, markdown table rendering for results, and a badge under each response showing whether it was processed locally (green) or AI-assisted (orange).</p>
+
+            <p>Staff type natural language. The system returns formatted tables or conversational answers depending on the query. Quick-action buttons parsed from Claude's responses let staff drill into attendance or contacts without typing follow-ups.</p>
+
+            <h2>Current State: Demo-Ready, Not Production</h2>
+
+            <div class="callout-warning">
+                <strong>The app currently talks to a mock Aeries server</strong> running on localhost with 3 fake schools and 13 fake students. The mock data is coherent enough for demos (real-looking attendance patterns, grade distributions, contact trees). Switching to production is a one-line .env change -- replace the mock URL with a real Aeries base URL and add the district-issued API certificate.
+            </div>
+
+            <p>What's ready:</p>
+            <ul>
+                <li>Core chat loop with Claude tool use -- working</li>
+                <li>All 10 tools defined and callable -- working</li>
+                <li>Two-tier local/AI routing with 8 regex patterns -- working</li>
+                <li>FERPA audit logging -- working</li>
+                <li>Session management with TTL and eviction -- working</li>
+                <li>Rate limiting -- working</li>
+                <li>30 passing tests -- working</li>
+            </ul>
+
+            <p>What's not:</p>
+            <ul>
+                <li>Google SSO (code written, needs client ID/secret)</li>
+                <li>TLS (cert generation script ready, not yet generated)</li>
+                <li>Real Aeries connection (needs district API cert)</li>
+            </ul>
+
+            <p>The same Aeries API certificate that blocks the SARB Tracker blocks this. Once district IT hands over credentials, both projects go live against real data the same day.</p>
+
+            <div class="blog-post-tags">
+                <span>Python</span>
+                <span>FastAPI</span>
+                <span>Claude API</span>
+                <span>FERPA</span>
+                <span>K-12 EdTech</span>
+                <span>Aeries SIS</span>
+                <span>Natural Language</span>
+                <span>Building in Public</span>
+            </div>
+        </div>
+    </article>
+</body>
+</html>
